@@ -1,0 +1,21 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any":"off",
+    "no-mixed-spaces-and-tabs": "off",
+    "@typescript-eslint/no-this-alias": "off"
+  },
+  "settings": {},
+  "overrides": []
+}
