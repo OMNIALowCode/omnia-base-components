@@ -223,3 +223,7 @@ export function hideErrorMessage(modal) {
   const label = modal.querySelector('.omnia-file-error-label');
   label.classList.add('d-none');
 }
+
+export function endpoint(code, settings) {
+  return `${settings.baseUrl}${settings.tenant}/${settings.environment}/application/${settings.entity}/Default/${code}/Files`;
+}

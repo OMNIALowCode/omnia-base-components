@@ -16,13 +16,13 @@ export function isNullOrEmpty(text: string | null | undefined): boolean {
   return text == null || text === '';
 }
 
-export function downloadFile(file, settings) {
-  const url = `${settings.baseUrl}${settings.tenant}/${settings.environment}/application/${file}`;
+export function downloadFile(file: string, baseUrl: string, tenant: string, environment: string, token: string) {
+  const url = `${baseUrl}${tenant}/${environment}/application/${file}`;
 
   fetch(url, {
     method: 'GET',
     headers: new Headers({
-      Authorization: 'Bearer ' + settings.token,
+      Authorization: `Bearer ${token}`,
     }),
   })
     .then(response => response.blob())
@@ -37,8 +37,4 @@ export function downloadFile(file, settings) {
       a.click();
       document.body.removeChild(a);
     });
-}
-
-export function endpoint(code, settings) {
-  return `${settings.baseUrl}${settings.tenant}/${settings.environment}/application/${settings.entity}/Default/${code}/Files`;
 }
