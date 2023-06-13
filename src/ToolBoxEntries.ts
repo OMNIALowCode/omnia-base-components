@@ -992,19 +992,19 @@ const lookUpRecipe: ToolBoxEntry = {
   name: 'lookUp',
   icon: 'search',
   element: {
-    name: 'loopUpPanel',
+    name: 'lookUpPanel',
     type: 'Panel',
     elements: [
       {
-        name: 'loopUpButtonPanel',
+        name: 'lookUpButtonPanel',
         type: 'Panel',
         elements: [
           {
-            name: 'loopUpButton',
+            name: 'lookUpButton',
             type: 'Button',
             elements: [
               {
-                name: 'loopUpButtonIcon',
+                name: 'lookUpButtonIcon',
                 type: 'Icon',
                 elements: [],
                 attributes: [
@@ -1052,7 +1052,7 @@ const lookUpRecipe: ToolBoxEntry = {
         groupElements: false,
       },
       {
-        name: 'loopUpInput',
+        name: 'lookUpInput',
         type: 'Input',
         elements: [],
         attributes: [],
