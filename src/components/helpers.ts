@@ -17,10 +17,6 @@ export function isNullOrEmpty(text: string | null | undefined): boolean {
 }
 
 export function downloadFile(file, settings) {
-  // const fileNameSplit = file.split('/');
-  // const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
-  // const originalCode = fileNameSplit[0];
-
   const url = `${settings.baseUrl}${settings.tenant}/${settings.environment}/application/${file}`;
 
   fetch(url, {
