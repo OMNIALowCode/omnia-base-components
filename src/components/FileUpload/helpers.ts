@@ -55,7 +55,16 @@ export function getModal(settings, onClose, onDownload, onRemove, onAdd) {
 
   modalContent.appendChild(getModalHeader());
   modalContent.appendChild(
-    getModalBody(settings.files, settings.language, settings.disabled, settings.multiple, onDownload, onRemove, onAdd),
+    getModalBody(
+      settings.files,
+      settings.language,
+      settings.disabled,
+      settings.multiple,
+      settings.accept,
+      onDownload,
+      onRemove,
+      onAdd,
+    ),
   );
   modalContent.appendChild(getModalFooter(onClose));
 
@@ -78,7 +87,7 @@ export function getModalHeader() {
   return modalHeader;
 }
 
-export function getModalBody(files, language, disabled, multiple, onDownload, onRemove, onAdd) {
+export function getModalBody(files, language, disabled, multiple, accept, onDownload, onRemove, onAdd) {
   const modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
 
@@ -94,7 +103,7 @@ export function getModalBody(files, language, disabled, multiple, onDownload, on
   }
 
   if (disabled === false) {
-    const fileInput = getFileInput(multiple, onAdd);
+    const fileInput = getFileInput(multiple, onAdd, accept);
     modalBody.appendChild(fileInput);
     modalBody.appendChild(getFileUploadButton(language, fileInput));
   }
@@ -129,7 +138,7 @@ export function getFileListEntry(file, disabled, onDownload, onRemove) {
   listEntry.className = 'list-group-item d-flex justify-content-between align-items-center p-0 pt-1 pb-1';
 
   const fileNameSplit = file.name.split('/');
-  const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
+  const fileName = fileNameSplit[fileNameSplit.length - 1];
 
   const downloadFileButton = document.createElement('button');
   downloadFileButton.innerText = fileName;
@@ -173,10 +182,11 @@ export function getFileUploadButton(language, fileInput) {
   return button;
 }
 
-export function getFileInput(multiple, onChange) {
+export function getFileInput(multiple, onChange, accept) {
   const input = document.createElement('input');
   input.type = 'file';
   input.multiple = multiple === true;
+  input.accept = accept;
   input.style.display = 'none';
   input.addEventListener('change', onChange);
 

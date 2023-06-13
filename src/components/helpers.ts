@@ -15,3 +15,34 @@ export function getReadOnly(attributes: DictionaryAny): boolean {
 export function isNullOrEmpty(text: string | null | undefined): boolean {
   return text == null || text === '';
 }
+
+export function downloadFile(file, settings) {
+  // const fileNameSplit = file.split('/');
+  // const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
+  // const originalCode = fileNameSplit[0];
+
+  const url = `${settings.baseUrl}${settings.tenant}/${settings.environment}/application/${file}`;
+
+  fetch(url, {
+    method: 'GET',
+    headers: new Headers({
+      Authorization: 'Bearer ' + settings.token,
+    }),
+  })
+    .then(response => response.blob())
+    .then(blob => {
+      const fileNameSplit = file.split('/');
+      const fileName = fileNameSplit[fileNameSplit.length - 1];
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+}
+
+export function endpoint(code, settings) {
+  return `${settings.baseUrl}${settings.tenant}/${settings.environment}/application/${settings.entity}/Default/${code}/Files`;
+}

@@ -1,5 +1,5 @@
 import { ExternalElementNodePropsType, onUpdateBindingType } from 'omnia-component-framework';
-import { getAttributeValue } from '../helpers';
+import { downloadFile, endpoint, getAttributeValue } from '../helpers';
 import {
   getButton,
   getButtonSpanLabel,
@@ -32,14 +32,13 @@ class FileUpload extends HTMLElement {
       files: [],
       multiple: false,
       entity: '',
-      uploadAddress: '',
       disabled: false,
       state: null,
       filesToUpload: [],
       tenant: '',
       environment: '',
       token: '',
-      dataSource: '',
+      accept: '',
     };
 
     this.onModalClose = this.onModalClose.bind(this);
@@ -74,15 +73,13 @@ class FileUpload extends HTMLElement {
     this._updateBinding = renderProps.onUpdateBinding;
     this._buttonSpanLabel.textContent = translation.buttonLabel;
     this.setFiles(getAttributeValue(renderProps.attributes, 'value', ''));
-    this._settings.uploadAddress = getAttributeValue<string>(renderProps.attributes, 'uploadAddress', '');
     this._settings.entity = getAttributeValue<string>(renderProps.attributes, 'entity', '');
     this._settings.multiple = getAttributeValue<boolean>(renderProps.attributes, 'multiple', false);
-    this._settings.dataSource = getAttributeValue<string>(renderProps.attributes, 'dataSource', '');
+    this._settings.accept = getAttributeValue<string>(renderProps.attributes, 'accept', '');
 
-    this._settings.disabled =
-      this._settings.uploadAddress || this._settings.entity
-        ? getAttributeValue<boolean>(renderProps.attributes, 'readOnly', false)
-        : true;
+    this._settings.disabled = this._settings.entity
+      ? getAttributeValue<boolean>(renderProps.attributes, 'readOnly', false)
+      : true;
     this._settings.token = renderProps?.authentication?.token ?? '';
     this._settings.tenant = renderProps?.tenant?.code ?? '';
     this._settings.environment = renderProps?.tenant?.environment ?? '';
@@ -121,7 +118,7 @@ class FileUpload extends HTMLElement {
   }
 
   onFileDownload(file) {
-    return () => this.downloadFile(file);
+    return () => downloadFile(file, this._settings);
   }
 
   onFileRemove(file) {
@@ -152,46 +149,11 @@ class FileUpload extends HTMLElement {
       );
   }
 
-  downloadFile(file) {
-    const fileNameSplit = file.split('/');
-    const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
-    const originalCode = fileNameSplit[0];
-
-    const url = `${this.endpoint(originalCode)}/${fileName}`;
-
-    fetch(url, {
-      method: 'GET',
-      headers: new Headers({
-        Authorization: 'Bearer ' + this._settings.token,
-      }),
-    })
-      .then(response => response.blob())
-      .then(blob => {
-        const isIos = /Macintosh/.test(navigator.userAgent) && !(<any>window).MSStream;
-
-        if (isIos) {
-          const reader = new FileReader();
-          reader.onload = function () {
-            window.open(`${reader?.result}`);
-          };
-          reader.readAsDataURL(blob);
-        } else {
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = file.replace(/\//g, '_');
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        }
-      });
-  }
-
   deleteFile(file) {
     const fileNameSplit = file.split('/');
     const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
     const originalCode = fileNameSplit[0];
-    const url = `${this.endpoint(originalCode)}/${fileName}`;
+    const url = `${endpoint(originalCode, this._settings)}/${fileName}`;
 
     return fetch(url, {
       method: 'DELETE',
@@ -235,7 +197,7 @@ class FileUpload extends HTMLElement {
         if (responses.length > 0) {
           const newValue = this._settings.multiple ? this._settings.files.map(f => f.name) : [];
           for (const response of responses) {
-            newValue.push(`${response.identifier}/${response.fileName}`);
+            newValue.push(`${this._settings.entity}/Default/${response.identifier}/Files/${response.fileName}`);
           }
           this.updateValue(newValue.join(';'));
         }
@@ -255,7 +217,7 @@ class FileUpload extends HTMLElement {
       formData.set('file', file);
     }
 
-    return fetch(this.endpoint(identifier), {
+    return fetch(endpoint(identifier, this._settings), {
       method: 'POST',
       headers: new Headers({
         Authorization: 'Bearer ' + this._settings.token,
@@ -267,13 +229,6 @@ class FileUpload extends HTMLElement {
       status: response.status,
       message: `${file.name}: ${response.statusText}`,
     }));
-  }
-
-  endpoint(code) {
-    if (this._settings.uploadAddress != null && this._settings.uploadAddress !== '')
-      return `${this._settings.baseUrl}${this._settings.tenant}/${this._settings.environment}/application/${this._settings.uploadAddress}/Files`;
-
-    return `${this._settings.baseUrl}${this._settings.tenant}/${this._settings.environment}/application/${this._settings.entity}/${this._settings.dataSource}/${code}/Files`;
   }
 
   updateValue(newValue: string) {
