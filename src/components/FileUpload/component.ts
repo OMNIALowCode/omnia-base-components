@@ -118,20 +118,20 @@ class FileUpload extends HTMLElement {
     this._modal = null;
   }
 
-  onFileDownload(file) {
+  onFileDownload(file: string) {
     return () => downloadFile(file, this._settings.tenant, this._settings.environment, this._settings.token);
   }
 
-  onFileRemove(file) {
+  onFileRemove(file: string) {
     return () => this.deleteFile(file);
   }
 
-  onAddFile(e) {
+  onAddFile(e: any) {
     this._settings.filesToUpload = e.target.files;
     this.save();
   }
 
-  setFiles(newValue) {
+  setFiles(newValue: string) {
     this._settings.files =
       newValue != null && newValue !== ''
         ? newValue.split(';').map(fileName => {
@@ -150,7 +150,7 @@ class FileUpload extends HTMLElement {
       );
   }
 
-  deleteFile(file) {
+  async deleteFile(file: string) {
     const fileNameSplit = file.split('/');
     const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
     const originalCode = fileNameSplit[0];
@@ -181,8 +181,8 @@ class FileUpload extends HTMLElement {
     Promise.all(requests)
       .then((responses: any) => {
         const errorMessage = responses
-          .filter(entry => entry.status >= 400)
-          .map(entry => entry.message)
+          .filter((entry: any) => entry.status >= 400)
+          .map((entry: any) => entry.message)
           .join('. ');
 
         if ((errorMessage || '') !== '') {

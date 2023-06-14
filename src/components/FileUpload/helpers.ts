@@ -1,5 +1,5 @@
 import { baseUrl } from '../helpers';
-import { FileUploadSettings } from './types';
+import { FileUploadSettings, File } from './types';
 
 export const translation = {
   buttonLabel: 'Files',
@@ -17,7 +17,7 @@ export function getIdentifier() {
   });
 }
 
-export function getButton(onClick) {
+export function getButton(onClick: any) {
   const button = document.createElement('button');
   button.setAttribute('class', 'btn btn-block btn-outline-secondary omnia-file-button');
   button.addEventListener('click', onClick);
@@ -45,7 +45,7 @@ export function getModalBackdrop() {
   return backdrop;
 }
 
-export function getModal(settings, onClose, onDownload, onRemove, onAdd) {
+export function getModal(settings: FileUploadSettings, onClose: any, onDownload: any, onRemove: any, onAdd: any) {
   const modal = document.createElement('div');
   modal.className = 'modal fade show d-block';
   modal.setAttribute('tabindex', '-1');
@@ -58,16 +58,7 @@ export function getModal(settings, onClose, onDownload, onRemove, onAdd) {
 
   modalContent.appendChild(getModalHeader());
   modalContent.appendChild(
-    getModalBody(
-      settings.files,
-      settings.language,
-      settings.disabled,
-      settings.multiple,
-      settings.accept,
-      onDownload,
-      onRemove,
-      onAdd,
-    ),
+    getModalBody(settings.files, settings.disabled, settings.multiple, settings.accept, onDownload, onRemove, onAdd),
   );
   modalContent.appendChild(getModalFooter(onClose));
 
@@ -90,7 +81,15 @@ export function getModalHeader() {
   return modalHeader;
 }
 
-export function getModalBody(files, language, disabled, multiple, accept, onDownload, onRemove, onAdd) {
+export function getModalBody(
+  files: File[],
+  disabled: boolean,
+  multiple: boolean,
+  accept: string,
+  onDownload: any,
+  onRemove: any,
+  onAdd: any,
+) {
   const modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
 
@@ -106,9 +105,9 @@ export function getModalBody(files, language, disabled, multiple, accept, onDown
   }
 
   if (disabled === false) {
-    const fileInput = getFileInput(multiple, onAdd, accept);
+    const fileInput = getFileInput(multiple, accept, onAdd);
     modalBody.appendChild(fileInput);
-    modalBody.appendChild(getFileUploadButton(language, fileInput));
+    modalBody.appendChild(getFileUploadButton(fileInput));
   }
 
   modalBody.appendChild(getErrorLabel());
@@ -123,7 +122,7 @@ export function getModalFileList() {
   return list;
 }
 
-export function updateFileList(modal, files, disabled, onDownload, onRemove) {
+export function updateFileList(modal: any, files: File[], disabled: boolean, onDownload: any, onRemove: any) {
   const list = modal.querySelector('.omnia-file-list');
   list.innerHTML = '';
 
@@ -136,7 +135,7 @@ export function updateFileList(modal, files, disabled, onDownload, onRemove) {
   else noFilesLabel.classList.add('d-none');
 }
 
-export function getFileListEntry(file, disabled, onDownload, onRemove) {
+export function getFileListEntry(file: File, disabled: boolean, onDownload: any, onRemove: any) {
   const listEntry = document.createElement('li');
   listEntry.className = 'list-group-item d-flex justify-content-between align-items-center p-0 pt-1 pb-1';
 
@@ -163,7 +162,7 @@ export function getFileListEntry(file, disabled, onDownload, onRemove) {
   return listEntry;
 }
 
-export function getNoFilesLabel(visible) {
+export function getNoFilesLabel(visible: boolean) {
   const noFilesLabel = document.createElement('h6');
   noFilesLabel.className = 'omnia-file-no-files-label text-center';
   if (!visible) noFilesLabel.classList.add('d-none');
@@ -177,7 +176,7 @@ export function getErrorLabel() {
   return errorLabel;
 }
 
-export function getFileUploadButton(language, fileInput) {
+export function getFileUploadButton(fileInput: HTMLInputElement) {
   const button = document.createElement('button');
   button.className = 'btn btn-primary btn-block omnia-file-selector-btn pt-2';
   button.innerHTML = translation.uploadLabel + '&nbsp<i class="fa fa-fw fa-spinner fa-pulse d-none"></i>';
@@ -185,7 +184,7 @@ export function getFileUploadButton(language, fileInput) {
   return button;
 }
 
-export function getFileInput(multiple, onChange, accept) {
+export function getFileInput(multiple: boolean, accept: string, onChange: any) {
   const input = document.createElement('input');
   input.type = 'file';
   input.multiple = multiple === true;
@@ -196,7 +195,7 @@ export function getFileInput(multiple, onChange, accept) {
   return input;
 }
 
-export function getModalFooter(onClose) {
+export function getModalFooter(onClose: any) {
   const modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
 
@@ -210,19 +209,19 @@ export function getModalFooter(onClose) {
   return modalFooter;
 }
 
-export function toggleLoading(modal) {
+export function toggleLoading(modal: any) {
   const button = modal.querySelector('.omnia-file-selector-btn');
   button.disabled = !button.disabled;
   button.querySelector('i').classList.toggle('d-none');
 }
 
-export function showErrorMessage(modal, message) {
+export function showErrorMessage(modal: any, message: any) {
   const label = modal.querySelector('.omnia-file-error-label');
   label.textContent = message;
   label.classList.remove('d-none');
 }
 
-export function hideErrorMessage(modal) {
+export function hideErrorMessage(modal: any) {
   const label = modal.querySelector('.omnia-file-error-label');
   label.classList.add('d-none');
 }

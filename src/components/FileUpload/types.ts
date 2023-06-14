@@ -15,4 +15,4 @@ interface FileUploadSettings {
   accept: string;
 }
 
-export { type FileUploadSettings };
+export { type FileUploadSettings, type File };
