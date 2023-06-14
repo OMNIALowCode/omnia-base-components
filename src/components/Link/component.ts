@@ -17,8 +17,8 @@ class Link extends HTMLAnchorElement {
     this.target = targert ? targert : '_self';
   }
 
-  onClick(e) {
-    if (!this.target) e.preventDefault();
+  onClick(event: MouseEvent) {
+    if (!this.target) event.preventDefault();
   }
 }
 

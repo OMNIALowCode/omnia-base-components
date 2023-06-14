@@ -3,8 +3,8 @@ import { getAttributeValue, getReadOnly, getValue } from '../../helpers';
 
 class InputInteger extends HTMLInputElement {
   private _renderProps?: ExternalElementNodePropsType;
-  private timeoutReference: any;
-  private timeout: any;
+  private timeoutReference: NodeJS.Timeout | undefined;
+  private timeout: number;
 
   constructor() {
     super();
@@ -28,12 +28,12 @@ class InputInteger extends HTMLInputElement {
     this.min = getAttributeValue(renderProps.attributes, 'minimumValue', undefined);
   }
 
-  onChange(e) {
-    this._renderProps?.onUpdateBinding('value', e.target.valueAsNumber);
+  onChange(event: Event) {
+    this._renderProps?.onUpdateBinding('value', (event?.target as HTMLInputElement)?.valueAsNumber);
   }
 
-  onLostFocus(e) {
-    this._renderProps?.onExecuteEvent('OnChange', [e.target.valueAsNumber]);
+  onLostFocus(event: Event) {
+    this._renderProps?.onExecuteEvent('OnChange', [(event?.target as HTMLInputElement)?.valueAsNumber]);
   }
 
   onKeyUp(ev: KeyboardEvent) {

@@ -1,9 +1,10 @@
 import { ExternalElementNodePropsType } from 'omnia-component-framework';
 import { getAttributeValue, getReadOnly, getValue } from '../../helpers';
+
 class InputDecimal extends HTMLInputElement {
   private _renderProps?: ExternalElementNodePropsType;
-  private timeoutReference: any;
-  private timeout: any;
+  private timeoutReference: NodeJS.Timeout | undefined;
+  private timeout: number;
 
   constructor() {
     super();
@@ -30,12 +31,12 @@ class InputDecimal extends HTMLInputElement {
     this.step = decimalPlaces > 0 ? `0${'.'.padEnd(decimalPlaces, '0')}1` : '0';
   }
 
-  onChange(e) {
-    this._renderProps?.onUpdateBinding('value', e.target.valueAsNumber);
+  onChange(event: Event) {
+    this._renderProps?.onUpdateBinding('value', (event?.target as HTMLInputElement)?.valueAsNumber);
   }
 
-  onLostFocus(e) {
-    this._renderProps?.onExecuteEvent('OnChange', [e.target.valueAsNumber]);
+  onLostFocus(event: Event) {
+    this._renderProps?.onExecuteEvent('OnChange', [(event?.target as HTMLInputElement)?.valueAsNumber]);
   }
 
   onKeyUp(ev: KeyboardEvent) {

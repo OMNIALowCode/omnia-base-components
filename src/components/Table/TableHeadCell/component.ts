@@ -13,10 +13,10 @@ class TableHeadCell extends TableCellElement {
   }
 
   private onClickEvent?: () => void;
-  onClick(e) {
+  onClick(event: MouseEvent) {
     if (this.onClickEvent) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
+      event.preventDefault();
+      event.stopImmediatePropagation();
       this.onClickEvent();
     }
   }

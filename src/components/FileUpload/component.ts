@@ -125,8 +125,8 @@ class FileUpload extends HTMLElement {
     return this.deleteFile(file);
   }
 
-  onAddFile(e: Event) {
-    const files = (e?.target as HTMLInputElement)?.files;
+  onAddFile(event: Event) {
+    const files = (event?.target as HTMLInputElement)?.files;
     this._settings.filesToUpload = files ? Array.from(files) : [];
     this.save();
   }

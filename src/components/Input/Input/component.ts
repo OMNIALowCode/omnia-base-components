@@ -3,8 +3,8 @@ import { getReadOnly, getValue } from '../../helpers';
 
 class Input extends HTMLInputElement {
   private _renderProps?: ExternalElementNodePropsType;
-  private timeoutReference: any;
-  private timeout: any;
+  private timeoutReference: NodeJS.Timeout | undefined;
+  private timeout: number;
 
   constructor() {
     super();
@@ -24,12 +24,12 @@ class Input extends HTMLInputElement {
     this.readOnly = getReadOnly(renderProps.attributes);
   }
 
-  onLostFocus(e) {
-    this._renderProps?.onUpdateBinding('value', e.target.value);
+  onLostFocus(event: Event) {
+    this._renderProps?.onUpdateBinding('value', (event?.target as HTMLInputElement)?.value);
   }
 
-  onChange(e) {
-    this._renderProps?.onExecuteEvent('OnChange', [e.target.value]);
+  onChange(event: Event) {
+    this._renderProps?.onExecuteEvent('OnChange', [(event?.target as HTMLInputElement)?.value]);
   }
 
   onKeyUp(ev: KeyboardEvent) {
