@@ -15,15 +15,15 @@ import {
   translation,
   updateFileList,
 } from './helpers';
-import { FileUploadSettings } from './types';
+import { FileUploadResult, FileUploadSettings } from './types';
 
 class FileUpload extends HTMLElement {
   private _settings: FileUploadSettings;
   private _button: HTMLButtonElement;
   private _buttonSpanLabel: HTMLSpanElement;
   private _buttonSpanNumberFilesLabel: HTMLSpanElement;
-  private _modal: any;
-  private _modalBackdrop: any;
+  private _modal: HTMLDivElement | null;
+  private _modalBackdrop: HTMLDivElement | null;
   private _updateBinding: onUpdateBindingType | null;
 
   constructor() {
@@ -34,7 +34,6 @@ class FileUpload extends HTMLElement {
       multiple: false,
       entity: '',
       disabled: false,
-      state: null,
       filesToUpload: [],
       tenant: '',
       environment: '',
@@ -111,23 +110,24 @@ class FileUpload extends HTMLElement {
   }
 
   onModalClose() {
-    this.removeChild(this._modal);
-    document.body.removeChild(this._modalBackdrop);
+    if (this._modal) this.removeChild(this._modal);
+    if (this._modalBackdrop) document.body.removeChild(this._modalBackdrop);
 
     this._modalBackdrop = null;
     this._modal = null;
   }
 
   onFileDownload(file: string) {
-    return () => downloadFile(file, this._settings.tenant, this._settings.environment, this._settings.token);
+    return downloadFile(file, this._settings.tenant, this._settings.environment, this._settings.token);
   }
 
   onFileRemove(file: string) {
-    return () => this.deleteFile(file);
+    return this.deleteFile(file);
   }
 
-  onAddFile(e: any) {
-    this._settings.filesToUpload = e.target.files;
+  onAddFile(e: Event) {
+    const files = (e?.target as HTMLInputElement)?.files;
+    this._settings.filesToUpload = files ? Array.from(files) : [];
     this.save();
   }
 
@@ -135,7 +135,7 @@ class FileUpload extends HTMLElement {
     this._settings.files =
       newValue != null && newValue !== ''
         ? newValue.split(';').map(fileName => {
-            return { name: fileName };
+            return fileName;
           })
         : [];
 
@@ -162,13 +162,13 @@ class FileUpload extends HTMLElement {
         Authorization: 'Bearer ' + this._settings.token,
       }),
     }).then(() => {
-      this._settings.files = this._settings.files.filter(f => f.name !== file);
-      this.updateValue(this._settings.files.map(f => f.name).join(';'));
+      this._settings.files = this._settings.files.filter(fName => fName !== file);
+      this.updateValue(this._settings.files.join(';'));
     });
   }
 
   save() {
-    const requests: any[] = [];
+    const requests: Promise<FileUploadResult>[] = [];
     for (const file of this._settings.filesToUpload) {
       const uploadIdentifier = getIdentifier();
       requests.push(this.uploadFile(uploadIdentifier, file));
@@ -179,10 +179,10 @@ class FileUpload extends HTMLElement {
     if (this._modal) toggleLoading(this._modal);
 
     Promise.all(requests)
-      .then((responses: any) => {
+      .then((responses: FileUploadResult[]) => {
         const errorMessage = responses
-          .filter((entry: any) => entry.status >= 400)
-          .map((entry: any) => entry.message)
+          .filter((entry: FileUploadResult) => entry.status >= 400)
+          .map((entry: FileUploadResult) => entry.message)
           .join('. ');
 
         if ((errorMessage || '') !== '') {
@@ -196,7 +196,7 @@ class FileUpload extends HTMLElement {
       })
       .then(responses => {
         if (responses.length > 0) {
-          const newValue = this._settings.multiple ? this._settings.files.map(f => f.name) : [];
+          const newValue = this._settings.multiple ? this._settings.files : [];
           for (const response of responses) {
             newValue.push(`${this._settings.entity}/Default/${response.identifier}/Files/${response.fileName}`);
           }
@@ -207,7 +207,7 @@ class FileUpload extends HTMLElement {
       });
   }
 
-  async uploadFile(identifier: string, file: any) {
+  async uploadFile(identifier: string, file: File): Promise<FileUploadResult> {
     const formData = new FormData();
 
     if (file && file.name) {

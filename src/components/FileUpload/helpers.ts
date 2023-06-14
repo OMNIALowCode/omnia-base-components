@@ -1,5 +1,5 @@
 import { baseUrl } from '../helpers';
-import { FileUploadSettings, File } from './types';
+import { ChangeEvent, DownloadEvent, FileUploadSettings, MouseClickEvent, RemoveEvent } from './types';
 
 export const translation = {
   buttonLabel: 'Files',
@@ -17,7 +17,7 @@ export function getIdentifier() {
   });
 }
 
-export function getButton(onClick: any) {
+export function getButton(onClick: MouseClickEvent) {
   const button = document.createElement('button');
   button.setAttribute('class', 'btn btn-block btn-outline-secondary omnia-file-button');
   button.addEventListener('click', onClick);
@@ -45,7 +45,13 @@ export function getModalBackdrop() {
   return backdrop;
 }
 
-export function getModal(settings: FileUploadSettings, onClose: any, onDownload: any, onRemove: any, onAdd: any) {
+export function getModal(
+  settings: FileUploadSettings,
+  onClose: MouseClickEvent,
+  onDownload: DownloadEvent,
+  onRemove: RemoveEvent,
+  onAdd: ChangeEvent,
+) {
   const modal = document.createElement('div');
   modal.className = 'modal fade show d-block';
   modal.setAttribute('tabindex', '-1');
@@ -82,13 +88,13 @@ export function getModalHeader() {
 }
 
 export function getModalBody(
-  files: File[],
+  files: string[],
   disabled: boolean,
   multiple: boolean,
   accept: string,
-  onDownload: any,
-  onRemove: any,
-  onAdd: any,
+  onDownload: DownloadEvent,
+  onRemove: RemoveEvent,
+  onAdd: ChangeEvent,
 ) {
   const modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
@@ -122,31 +128,39 @@ export function getModalFileList() {
   return list;
 }
 
-export function updateFileList(modal: any, files: File[], disabled: boolean, onDownload: any, onRemove: any) {
-  const list = modal.querySelector('.omnia-file-list');
-  list.innerHTML = '';
+export function updateFileList(
+  modal: HTMLDivElement,
+  files: string[],
+  disabled: boolean,
+  onDownload: DownloadEvent,
+  onRemove: RemoveEvent,
+) {
+  const list: HTMLUListElement | null = modal.querySelector('.omnia-file-list');
+  if (list) list.innerHTML = '';
 
   for (const file of files) {
-    list.appendChild(getFileListEntry(file, disabled, onDownload, onRemove));
+    list?.appendChild(getFileListEntry(file, disabled, onDownload, onRemove));
   }
 
   const noFilesLabel = modal.querySelector('.omnia-file-no-files-label');
-  if (files.length === 0) noFilesLabel.classList.remove('d-none');
-  else noFilesLabel.classList.add('d-none');
+  if (files.length === 0) noFilesLabel?.classList.remove('d-none');
+  else noFilesLabel?.classList.add('d-none');
 }
 
-export function getFileListEntry(file: File, disabled: boolean, onDownload: any, onRemove: any) {
+export function getFileListEntry(file: string, disabled: boolean, onDownload: DownloadEvent, onRemove: RemoveEvent) {
   const listEntry = document.createElement('li');
   listEntry.className = 'list-group-item d-flex justify-content-between align-items-center p-0 pt-1 pb-1';
 
-  const fileNameSplit = file.name.split('/');
+  const fileNameSplit = file.split('/');
   const fileName = fileNameSplit[fileNameSplit.length - 1];
 
   const downloadFileButton = document.createElement('button');
   downloadFileButton.innerText = fileName;
   downloadFileButton.title = fileName;
   downloadFileButton.className = 'btn btn-link text-truncate';
-  downloadFileButton.addEventListener('click', onDownload(file.name));
+  downloadFileButton.addEventListener('click', () => {
+    onDownload(file);
+  });
 
   listEntry.appendChild(downloadFileButton);
 
@@ -154,7 +168,9 @@ export function getFileListEntry(file: File, disabled: boolean, onDownload: any,
     const removeFileButton = document.createElement('button');
     removeFileButton.innerHTML = '<i class="fa fa-trash"></i>';
     removeFileButton.className = 'btn btn-outline-danger pull-rigth';
-    removeFileButton.addEventListener('click', onRemove(file.name));
+    removeFileButton.addEventListener('click', () => {
+      onRemove(file);
+    });
 
     listEntry.appendChild(removeFileButton);
   }
@@ -184,7 +200,7 @@ export function getFileUploadButton(fileInput: HTMLInputElement) {
   return button;
 }
 
-export function getFileInput(multiple: boolean, accept: string, onChange: any) {
+export function getFileInput(multiple: boolean, accept: string, onChange: ChangeEvent) {
   const input = document.createElement('input');
   input.type = 'file';
   input.multiple = multiple === true;
@@ -195,7 +211,7 @@ export function getFileInput(multiple: boolean, accept: string, onChange: any) {
   return input;
 }
 
-export function getModalFooter(onClose: any) {
+export function getModalFooter(onClose: MouseClickEvent) {
   const modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
 
@@ -209,21 +225,25 @@ export function getModalFooter(onClose: any) {
   return modalFooter;
 }
 
-export function toggleLoading(modal: any) {
-  const button = modal.querySelector('.omnia-file-selector-btn');
-  button.disabled = !button.disabled;
-  button.querySelector('i').classList.toggle('d-none');
+export function toggleLoading(modal: HTMLDivElement) {
+  const button = <HTMLButtonElement>modal.querySelector('.omnia-file-selector-btn');
+  if (button) {
+    button.disabled = !button.disabled;
+    button.querySelector('i')?.classList.toggle('d-none');
+  }
 }
 
-export function showErrorMessage(modal: any, message: any) {
+export function showErrorMessage(modal: HTMLDivElement, message: string) {
   const label = modal.querySelector('.omnia-file-error-label');
-  label.textContent = message;
-  label.classList.remove('d-none');
+  if (label) {
+    label.textContent = message;
+    label.classList.remove('d-none');
+  }
 }
 
-export function hideErrorMessage(modal: any) {
+export function hideErrorMessage(modal: HTMLDivElement) {
   const label = modal.querySelector('.omnia-file-error-label');
-  label.classList.add('d-none');
+  label?.classList.add('d-none');
 }
 
 export function endpoint(code: string, settings: FileUploadSettings) {
