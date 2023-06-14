@@ -2,12 +2,11 @@ import { ExternalElementNodePropsType } from 'omnia-component-framework';
 import { getAttributeValue } from '../helpers';
 
 class Button extends HTMLButtonElement {
+  private onClickEvent?: () => void;
   constructor() {
     super();
     this.onclick = this.onClick.bind(this);
   }
-
-  private onClickEvent?: () => void;
 
   setRenderProps(renderProps: ExternalElementNodePropsType) {
     this.removeAttribute('style');
@@ -19,10 +18,10 @@ class Button extends HTMLButtonElement {
       this.onClickEvent = () => renderProps?.onExecuteEvent('OnClick', []);
   }
 
-  onClick(e) {
+  onClick(event: MouseEvent) {
     if (this.onClickEvent) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
+      event.preventDefault();
+      event.stopImmediatePropagation();
       this.onClickEvent();
     }
   }

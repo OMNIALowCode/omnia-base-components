@@ -29,22 +29,15 @@ const FileUpload: ElementNodeConfiguration = {
       defaultValue: false,
     } as BooleanPropertyConfiguration,
     {
+      key: 'accept',
+      direction: PROPERTY_DIRECTIONS.INBOUND,
+      dataType: PROPERTY_DATA_TYPE.TEXT,
+    } as BooleanPropertyConfiguration,
+    {
       key: 'entity',
       direction: PROPERTY_DIRECTIONS.INBOUND,
       dataType: PROPERTY_DATA_TYPE.TEXT,
       isRequired: true,
-    } as TextPropertyConfiguration,
-    {
-      key: 'dataSource',
-      isRequired: true,
-      direction: PROPERTY_DIRECTIONS.INBOUND,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
-      defaultValue: 'Default',
-    } as TextPropertyConfiguration,
-    {
-      key: 'uploadAddress',
-      direction: PROPERTY_DIRECTIONS.INBOUND,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
     } as TextPropertyConfiguration,
     {
       key: 'buttonLabel',

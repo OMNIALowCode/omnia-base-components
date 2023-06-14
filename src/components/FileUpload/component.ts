@@ -1,6 +1,8 @@
 import { ExternalElementNodePropsType, onUpdateBindingType } from 'omnia-component-framework';
 import { getAttributeValue } from '../helpers';
 import {
+  downloadFile,
+  endpoint,
   getButton,
   getButtonSpanLabel,
   getButtonSpanNumberFilesLabel,
@@ -13,33 +15,30 @@ import {
   translation,
   updateFileList,
 } from './helpers';
-import { FileUploadSettings } from './types';
+import { FileUploadResult, FileUploadSettings } from './types';
 
 class FileUpload extends HTMLElement {
   private _settings: FileUploadSettings;
   private _button: HTMLButtonElement;
   private _buttonSpanLabel: HTMLSpanElement;
   private _buttonSpanNumberFilesLabel: HTMLSpanElement;
-  private _modal: any;
-  private _modalBackdrop: any;
+  private _modal: HTMLDivElement | null;
+  private _modalBackdrop: HTMLDivElement | null;
   private _updateBinding: onUpdateBindingType | null;
 
   constructor() {
     super();
 
     this._settings = {
-      baseUrl: `${window.location.protocol}//${window.location.host}/api/v1/`,
       files: [],
       multiple: false,
       entity: '',
-      uploadAddress: '',
       disabled: false,
-      state: null,
       filesToUpload: [],
       tenant: '',
       environment: '',
       token: '',
-      dataSource: '',
+      accept: '',
     };
 
     this.onModalClose = this.onModalClose.bind(this);
@@ -48,7 +47,6 @@ class FileUpload extends HTMLElement {
     this.onAddFile = this.onAddFile.bind(this);
     this.setFiles = this.setFiles.bind(this);
 
-    // DOM
     this._button = getButton(this.onButtonClick.bind(this));
     this._buttonSpanLabel = getButtonSpanLabel();
     this._buttonSpanNumberFilesLabel = getButtonSpanNumberFilesLabel();
@@ -74,15 +72,13 @@ class FileUpload extends HTMLElement {
     this._updateBinding = renderProps.onUpdateBinding;
     this._buttonSpanLabel.textContent = translation.buttonLabel;
     this.setFiles(getAttributeValue(renderProps.attributes, 'value', ''));
-    this._settings.uploadAddress = getAttributeValue<string>(renderProps.attributes, 'uploadAddress', '');
     this._settings.entity = getAttributeValue<string>(renderProps.attributes, 'entity', '');
     this._settings.multiple = getAttributeValue<boolean>(renderProps.attributes, 'multiple', false);
-    this._settings.dataSource = getAttributeValue<string>(renderProps.attributes, 'dataSource', '');
+    this._settings.accept = getAttributeValue<string>(renderProps.attributes, 'accept', '');
 
-    this._settings.disabled =
-      this._settings.uploadAddress || this._settings.entity
-        ? getAttributeValue<boolean>(renderProps.attributes, 'readOnly', false)
-        : true;
+    this._settings.disabled = this._settings.entity
+      ? getAttributeValue<boolean>(renderProps.attributes, 'readOnly', false)
+      : true;
     this._settings.token = renderProps?.authentication?.token ?? '';
     this._settings.tenant = renderProps?.tenant?.code ?? '';
     this._settings.environment = renderProps?.tenant?.environment ?? '';
@@ -113,31 +109,32 @@ class FileUpload extends HTMLElement {
   }
 
   onModalClose() {
-    this.removeChild(this._modal);
-    document.body.removeChild(this._modalBackdrop);
+    if (this._modal) this.removeChild(this._modal);
+    if (this._modalBackdrop) document.body.removeChild(this._modalBackdrop);
 
     this._modalBackdrop = null;
     this._modal = null;
   }
 
-  onFileDownload(file) {
-    return () => this.downloadFile(file);
+  onFileDownload(file: string) {
+    return downloadFile(file, this._settings.tenant, this._settings.environment, this._settings.token);
   }
 
-  onFileRemove(file) {
-    return () => this.deleteFile(file);
+  onFileRemove(file: string) {
+    return this.deleteFile(file);
   }
 
-  onAddFile(e) {
-    this._settings.filesToUpload = e.target.files;
+  onAddFile(event: Event) {
+    const files = (event?.target as HTMLInputElement)?.files;
+    this._settings.filesToUpload = files ? Array.from(files) : [];
     this.save();
   }
 
-  setFiles(newValue) {
+  setFiles(newValue: string) {
     this._settings.files =
       newValue != null && newValue !== ''
         ? newValue.split(';').map(fileName => {
-            return { name: fileName };
+            return fileName;
           })
         : [];
 
@@ -152,46 +149,11 @@ class FileUpload extends HTMLElement {
       );
   }
 
-  downloadFile(file) {
+  async deleteFile(file: string) {
     const fileNameSplit = file.split('/');
     const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
     const originalCode = fileNameSplit[0];
-
-    const url = `${this.endpoint(originalCode)}/${fileName}`;
-
-    fetch(url, {
-      method: 'GET',
-      headers: new Headers({
-        Authorization: 'Bearer ' + this._settings.token,
-      }),
-    })
-      .then(response => response.blob())
-      .then(blob => {
-        const isIos = /Macintosh/.test(navigator.userAgent) && !(<any>window).MSStream;
-
-        if (isIos) {
-          const reader = new FileReader();
-          reader.onload = function () {
-            window.open(`${reader?.result}`);
-          };
-          reader.readAsDataURL(blob);
-        } else {
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = file.replace(/\//g, '_');
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        }
-      });
-  }
-
-  deleteFile(file) {
-    const fileNameSplit = file.split('/');
-    const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
-    const originalCode = fileNameSplit[0];
-    const url = `${this.endpoint(originalCode)}/${fileName}`;
+    const url = `${endpoint(originalCode, this._settings)}/${fileName}`;
 
     return fetch(url, {
       method: 'DELETE',
@@ -199,13 +161,13 @@ class FileUpload extends HTMLElement {
         Authorization: 'Bearer ' + this._settings.token,
       }),
     }).then(() => {
-      this._settings.files = this._settings.files.filter(f => f.name !== file);
-      this.updateValue(this._settings.files.map(f => f.name).join(';'));
+      this._settings.files = this._settings.files.filter(fName => fName !== file);
+      this.updateValue(this._settings.files.join(';'));
     });
   }
 
   save() {
-    const requests: any[] = [];
+    const requests: Promise<FileUploadResult>[] = [];
     for (const file of this._settings.filesToUpload) {
       const uploadIdentifier = getIdentifier();
       requests.push(this.uploadFile(uploadIdentifier, file));
@@ -216,10 +178,10 @@ class FileUpload extends HTMLElement {
     if (this._modal) toggleLoading(this._modal);
 
     Promise.all(requests)
-      .then((responses: any) => {
+      .then((responses: FileUploadResult[]) => {
         const errorMessage = responses
-          .filter(entry => entry.status >= 400)
-          .map(entry => entry.message)
+          .filter((entry: FileUploadResult) => entry.status >= 400)
+          .map((entry: FileUploadResult) => entry.message)
           .join('. ');
 
         if ((errorMessage || '') !== '') {
@@ -233,9 +195,9 @@ class FileUpload extends HTMLElement {
       })
       .then(responses => {
         if (responses.length > 0) {
-          const newValue = this._settings.multiple ? this._settings.files.map(f => f.name) : [];
+          const newValue = this._settings.multiple ? this._settings.files : [];
           for (const response of responses) {
-            newValue.push(`${response.identifier}/${response.fileName}`);
+            newValue.push(`${this._settings.entity}/Default/${response.identifier}/Files/${response.fileName}`);
           }
           this.updateValue(newValue.join(';'));
         }
@@ -244,7 +206,7 @@ class FileUpload extends HTMLElement {
       });
   }
 
-  async uploadFile(identifier: string, file: any) {
+  async uploadFile(identifier: string, file: File): Promise<FileUploadResult> {
     const formData = new FormData();
 
     if (file && file.name) {
@@ -255,7 +217,7 @@ class FileUpload extends HTMLElement {
       formData.set('file', file);
     }
 
-    return fetch(this.endpoint(identifier), {
+    return fetch(endpoint(identifier, this._settings), {
       method: 'POST',
       headers: new Headers({
         Authorization: 'Bearer ' + this._settings.token,
@@ -267,13 +229,6 @@ class FileUpload extends HTMLElement {
       status: response.status,
       message: `${file.name}: ${response.statusText}`,
     }));
-  }
-
-  endpoint(code) {
-    if (this._settings.uploadAddress != null && this._settings.uploadAddress !== '')
-      return `${this._settings.baseUrl}${this._settings.tenant}/${this._settings.environment}/application/${this._settings.uploadAddress}/Files`;
-
-    return `${this._settings.baseUrl}${this._settings.tenant}/${this._settings.environment}/application/${this._settings.entity}/${this._settings.dataSource}/${code}/Files`;
   }
 
   updateValue(newValue: string) {

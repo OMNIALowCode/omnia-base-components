@@ -1,9 +1,10 @@
 import { ExternalElementNodePropsType } from 'omnia-component-framework';
 import { getReadOnly, getValue } from '../../helpers';
+
 class InputPassword extends HTMLInputElement {
   private _renderProps?: ExternalElementNodePropsType;
-  private timeoutReference: any;
-  private timeout: any;
+  private timeoutReference: NodeJS.Timeout | undefined;
+  private timeout: number;
 
   constructor() {
     super();
@@ -23,12 +24,12 @@ class InputPassword extends HTMLInputElement {
     this.readOnly = getReadOnly(renderProps.attributes);
   }
 
-  onChange(e) {
-    this._renderProps?.onUpdateBinding('value', e.target.value);
+  onChange(event: Event) {
+    this._renderProps?.onUpdateBinding('value', (event?.target as HTMLInputElement)?.value);
   }
 
-  onLostFocus(e) {
-    this._renderProps?.onExecuteEvent('OnChange', [e.target.value]);
+  onLostFocus(event: Event) {
+    this._renderProps?.onExecuteEvent('OnChange', [(event?.target as HTMLInputElement)?.value]);
   }
 
   onKeyUp(ev: KeyboardEvent) {

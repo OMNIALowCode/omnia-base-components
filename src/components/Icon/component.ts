@@ -20,10 +20,10 @@ class Icon extends HTMLElement {
       this.onClickEvent = () => renderProps?.onExecuteEvent('OnClick', []);
   }
 
-  onClick(e) {
+  onClick(event: MouseEvent) {
     if (this.onClickEvent) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
+      event.preventDefault();
+      event.stopImmediatePropagation();
       this.onClickEvent();
     }
   }

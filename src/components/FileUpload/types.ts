@@ -1,21 +1,32 @@
-interface File {
-  name: string;
-}
+type MouseClickEvent = (ev: MouseEvent) => void;
+type ChangeEvent = (ev: Event) => void;
+type DownloadEvent = (file: string) => void;
+type RemoveEvent = (file: string) => void;
 
-interface FileUploadSettings {
-  baseUrl: string;
-  files: File[];
+type FileUploadSettings = {
+  files: string[];
   multiple: boolean;
   entity: string;
-  uploadAddress: string;
   disabled: boolean;
-  state: any;
   filesToUpload: File[];
   tenant: string;
   environment: string;
   token: string;
-  dataSource: string;
-}
+  accept: string;
+};
 
-export { type FileUploadSettings };
+type FileUploadResult = {
+  identifier: string;
+  fileName: string;
+  status: number;
+  message: string;
+};
 
+export {
+  type ChangeEvent,
+  type DownloadEvent,
+  type FileUploadResult,
+  type FileUploadSettings,
+  type MouseClickEvent,
+  type RemoveEvent,
+};

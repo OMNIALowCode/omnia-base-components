@@ -1,3 +1,6 @@
+import { baseUrl } from '../helpers';
+import { ChangeEvent, DownloadEvent, FileUploadSettings, MouseClickEvent, RemoveEvent } from './types';
+
 export const translation = {
   buttonLabel: 'Files',
   uploadLabel: 'Select file(s)',
@@ -14,7 +17,7 @@ export function getIdentifier() {
   });
 }
 
-export function getButton(onClick) {
+export function getButton(onClick: MouseClickEvent) {
   const button = document.createElement('button');
   button.setAttribute('class', 'btn btn-block btn-outline-secondary omnia-file-button');
   button.addEventListener('click', onClick);
@@ -42,7 +45,13 @@ export function getModalBackdrop() {
   return backdrop;
 }
 
-export function getModal(settings, onClose, onDownload, onRemove, onAdd) {
+export function getModal(
+  settings: FileUploadSettings,
+  onClose: MouseClickEvent,
+  onDownload: DownloadEvent,
+  onRemove: RemoveEvent,
+  onAdd: ChangeEvent,
+) {
   const modal = document.createElement('div');
   modal.className = 'modal fade show d-block';
   modal.setAttribute('tabindex', '-1');
@@ -55,7 +64,7 @@ export function getModal(settings, onClose, onDownload, onRemove, onAdd) {
 
   modalContent.appendChild(getModalHeader());
   modalContent.appendChild(
-    getModalBody(settings.files, settings.language, settings.disabled, settings.multiple, onDownload, onRemove, onAdd),
+    getModalBody(settings.files, settings.disabled, settings.multiple, settings.accept, onDownload, onRemove, onAdd),
   );
   modalContent.appendChild(getModalFooter(onClose));
 
@@ -78,7 +87,15 @@ export function getModalHeader() {
   return modalHeader;
 }
 
-export function getModalBody(files, language, disabled, multiple, onDownload, onRemove, onAdd) {
+export function getModalBody(
+  files: string[],
+  disabled: boolean,
+  multiple: boolean,
+  accept: string,
+  onDownload: DownloadEvent,
+  onRemove: RemoveEvent,
+  onAdd: ChangeEvent,
+) {
   const modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
 
@@ -94,9 +111,9 @@ export function getModalBody(files, language, disabled, multiple, onDownload, on
   }
 
   if (disabled === false) {
-    const fileInput = getFileInput(multiple, onAdd);
+    const fileInput = getFileInput(multiple, accept, onAdd);
     modalBody.appendChild(fileInput);
-    modalBody.appendChild(getFileUploadButton(language, fileInput));
+    modalBody.appendChild(getFileUploadButton(fileInput));
   }
 
   modalBody.appendChild(getErrorLabel());
@@ -111,31 +128,39 @@ export function getModalFileList() {
   return list;
 }
 
-export function updateFileList(modal, files, disabled, onDownload, onRemove) {
-  const list = modal.querySelector('.omnia-file-list');
-  list.innerHTML = '';
+export function updateFileList(
+  modal: HTMLDivElement,
+  files: string[],
+  disabled: boolean,
+  onDownload: DownloadEvent,
+  onRemove: RemoveEvent,
+) {
+  const list: HTMLUListElement | null = modal.querySelector('.omnia-file-list');
+  if (list) list.innerHTML = '';
 
   for (const file of files) {
-    list.appendChild(getFileListEntry(file, disabled, onDownload, onRemove));
+    list?.appendChild(getFileListEntry(file, disabled, onDownload, onRemove));
   }
 
   const noFilesLabel = modal.querySelector('.omnia-file-no-files-label');
-  if (files.length === 0) noFilesLabel.classList.remove('d-none');
-  else noFilesLabel.classList.add('d-none');
+  if (files.length === 0) noFilesLabel?.classList.remove('d-none');
+  else noFilesLabel?.classList.add('d-none');
 }
 
-export function getFileListEntry(file, disabled, onDownload, onRemove) {
+export function getFileListEntry(file: string, disabled: boolean, onDownload: DownloadEvent, onRemove: RemoveEvent) {
   const listEntry = document.createElement('li');
   listEntry.className = 'list-group-item d-flex justify-content-between align-items-center p-0 pt-1 pb-1';
 
-  const fileNameSplit = file.name.split('/');
-  const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
+  const fileNameSplit = file.split('/');
+  const fileName = fileNameSplit[fileNameSplit.length - 1];
 
   const downloadFileButton = document.createElement('button');
   downloadFileButton.innerText = fileName;
   downloadFileButton.title = fileName;
   downloadFileButton.className = 'btn btn-link text-truncate';
-  downloadFileButton.addEventListener('click', onDownload(file.name));
+  downloadFileButton.addEventListener('click', () => {
+    onDownload(file);
+  });
 
   listEntry.appendChild(downloadFileButton);
 
@@ -143,7 +168,9 @@ export function getFileListEntry(file, disabled, onDownload, onRemove) {
     const removeFileButton = document.createElement('button');
     removeFileButton.innerHTML = '<i class="fa fa-trash"></i>';
     removeFileButton.className = 'btn btn-outline-danger pull-rigth';
-    removeFileButton.addEventListener('click', onRemove(file.name));
+    removeFileButton.addEventListener('click', () => {
+      onRemove(file);
+    });
 
     listEntry.appendChild(removeFileButton);
   }
@@ -151,7 +178,7 @@ export function getFileListEntry(file, disabled, onDownload, onRemove) {
   return listEntry;
 }
 
-export function getNoFilesLabel(visible) {
+export function getNoFilesLabel(visible: boolean) {
   const noFilesLabel = document.createElement('h6');
   noFilesLabel.className = 'omnia-file-no-files-label text-center';
   if (!visible) noFilesLabel.classList.add('d-none');
@@ -165,7 +192,7 @@ export function getErrorLabel() {
   return errorLabel;
 }
 
-export function getFileUploadButton(language, fileInput) {
+export function getFileUploadButton(fileInput: HTMLInputElement) {
   const button = document.createElement('button');
   button.className = 'btn btn-primary btn-block omnia-file-selector-btn pt-2';
   button.innerHTML = translation.uploadLabel + '&nbsp<i class="fa fa-fw fa-spinner fa-pulse d-none"></i>';
@@ -173,17 +200,18 @@ export function getFileUploadButton(language, fileInput) {
   return button;
 }
 
-export function getFileInput(multiple, onChange) {
+export function getFileInput(multiple: boolean, accept: string, onChange: ChangeEvent) {
   const input = document.createElement('input');
   input.type = 'file';
   input.multiple = multiple === true;
+  input.accept = accept;
   input.style.display = 'none';
   input.addEventListener('change', onChange);
 
   return input;
 }
 
-export function getModalFooter(onClose) {
+export function getModalFooter(onClose: MouseClickEvent) {
   const modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
 
@@ -197,19 +225,50 @@ export function getModalFooter(onClose) {
   return modalFooter;
 }
 
-export function toggleLoading(modal) {
-  const button = modal.querySelector('.omnia-file-selector-btn');
-  button.disabled = !button.disabled;
-  button.querySelector('i').classList.toggle('d-none');
+export function toggleLoading(modal: HTMLDivElement) {
+  const button = <HTMLButtonElement>modal.querySelector('.omnia-file-selector-btn');
+  if (button) {
+    button.disabled = !button.disabled;
+    button.querySelector('i')?.classList.toggle('d-none');
+  }
 }
 
-export function showErrorMessage(modal, message) {
+export function showErrorMessage(modal: HTMLDivElement, message: string) {
   const label = modal.querySelector('.omnia-file-error-label');
-  label.textContent = message;
-  label.classList.remove('d-none');
+  if (label) {
+    label.textContent = message;
+    label.classList.remove('d-none');
+  }
 }
 
-export function hideErrorMessage(modal) {
+export function hideErrorMessage(modal: HTMLDivElement) {
   const label = modal.querySelector('.omnia-file-error-label');
-  label.classList.add('d-none');
+  label?.classList.add('d-none');
+}
+
+export function endpoint(code: string, settings: FileUploadSettings) {
+  return `${baseUrl}${settings.tenant}/${settings.environment}/application/${settings.entity}/Default/${code}/Files`;
+}
+
+export function downloadFile(file: string, tenant: string, environment: string, token: string) {
+  const url = `${baseUrl}${tenant}/${environment}/application/${file}`;
+
+  fetch(url, {
+    method: 'GET',
+    headers: new Headers({
+      Authorization: `Bearer ${token}`,
+    }),
+  })
+    .then(response => response.blob())
+    .then(blob => {
+      const fileNameSplit = file.split('/');
+      const fileName = fileNameSplit[fileNameSplit.length - 1];
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
 }

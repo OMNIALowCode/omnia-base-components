@@ -1,5 +1,7 @@
 import { DictionaryAny } from 'omnia-component-framework/dist/component-contract/src/contract/lib/Dictionary';
 
+export const baseUrl = `${window.location.protocol}//${window.location.host}/api/v1/`;
+
 export function getAttributeValue<T>(attributes: DictionaryAny, attribute: string, defaultValue: T): any {
   return attributes && attribute in attributes ? attributes[attribute] : defaultValue;
 }
