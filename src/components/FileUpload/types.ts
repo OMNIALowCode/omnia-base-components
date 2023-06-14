@@ -1,10 +1,9 @@
 type MouseClickEvent = (ev: MouseEvent) => void;
-
 type ChangeEvent = (ev: Event) => void;
 type DownloadEvent = (file: string) => void;
 type RemoveEvent = (file: string) => void;
 
-interface FileUploadSettings {
+type FileUploadSettings = {
   files: string[];
   multiple: boolean;
   entity: string;
@@ -14,20 +13,20 @@ interface FileUploadSettings {
   environment: string;
   token: string;
   accept: string;
-}
+};
 
-interface FileUploadResult {
+type FileUploadResult = {
   identifier: string;
   fileName: string;
   status: number;
   message: string;
-}
+};
 
 export {
-  type FileUploadSettings,
-  type FileUploadResult,
-  type MouseClickEvent,
   type ChangeEvent,
   type DownloadEvent,
+  type FileUploadResult,
+  type FileUploadSettings,
+  type MouseClickEvent,
   type RemoveEvent,
 };

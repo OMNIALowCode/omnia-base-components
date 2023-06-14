@@ -47,7 +47,6 @@ class FileUpload extends HTMLElement {
     this.onAddFile = this.onAddFile.bind(this);
     this.setFiles = this.setFiles.bind(this);
 
-    // DOM
     this._button = getButton(this.onButtonClick.bind(this));
     this._buttonSpanLabel = getButtonSpanLabel();
     this._buttonSpanNumberFilesLabel = getButtonSpanNumberFilesLabel();
