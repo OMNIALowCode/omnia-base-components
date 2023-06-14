@@ -3,7 +3,6 @@ interface File {
 }
 
 interface FileUploadSettings {
-  baseUrl: string;
   files: File[];
   multiple: boolean;
   entity: string;

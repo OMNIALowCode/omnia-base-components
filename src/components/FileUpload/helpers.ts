@@ -1,3 +1,6 @@
+import { baseUrl } from '../helpers';
+import { FileUploadSettings } from './types';
+
 export const translation = {
   buttonLabel: 'Files',
   uploadLabel: 'Select file(s)',
@@ -224,6 +227,29 @@ export function hideErrorMessage(modal) {
   label.classList.add('d-none');
 }
 
-export function endpoint(code, settings) {
-  return `${settings.baseUrl}${settings.tenant}/${settings.environment}/application/${settings.entity}/Default/${code}/Files`;
+export function endpoint(code: string, settings: FileUploadSettings) {
+  return `${baseUrl}${settings.tenant}/${settings.environment}/application/${settings.entity}/Default/${code}/Files`;
+}
+
+export function downloadFile(file: string, tenant: string, environment: string, token: string) {
+  const url = `${baseUrl}${tenant}/${environment}/application/${file}`;
+
+  fetch(url, {
+    method: 'GET',
+    headers: new Headers({
+      Authorization: `Bearer ${token}`,
+    }),
+  })
+    .then(response => response.blob())
+    .then(blob => {
+      const fileNameSplit = file.split('/');
+      const fileName = fileNameSplit[fileNameSplit.length - 1];
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
 }

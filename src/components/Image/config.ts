@@ -11,6 +11,12 @@ const Image: ElementNodeConfiguration = {
       direction: PROPERTY_DIRECTIONS.INBOUND,
     },
     {
+      key: 'omniaUrl',
+      isRequired: false,
+      dataType: PROPERTY_DATA_TYPE.TEXT,
+      direction: PROPERTY_DIRECTIONS.INBOUND,
+    },
+    {
       key: 'title',
       isRequired: false,
       dataType: PROPERTY_DATA_TYPE.TEXT,

@@ -1,6 +1,7 @@
 import { ExternalElementNodePropsType, onUpdateBindingType } from 'omnia-component-framework';
-import { downloadFile, getAttributeValue } from '../helpers';
+import { getAttributeValue } from '../helpers';
 import {
+  downloadFile,
   endpoint,
   getButton,
   getButtonSpanLabel,
@@ -29,7 +30,6 @@ class FileUpload extends HTMLElement {
     super();
 
     this._settings = {
-      baseUrl: `${window.location.protocol}//${window.location.host}/api/v1/`,
       files: [],
       multiple: false,
       entity: '',
@@ -119,14 +119,7 @@ class FileUpload extends HTMLElement {
   }
 
   onFileDownload(file) {
-    return () =>
-      downloadFile(
-        file,
-        this._settings.baseUrl,
-        this._settings.tenant,
-        this._settings.environment,
-        this._settings.token,
-      );
+    return () => downloadFile(file, this._settings.tenant, this._settings.environment, this._settings.token);
   }
 
   onFileRemove(file) {
