@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'link',
     icon: 'link',
     element: {
-      name: ComponentTypes.LINK,
+      name: 'link',
       type: ComponentTypes.LINK,
       elements: [],
       attributes: [],

@@ -25,11 +25,11 @@ class Input extends HTMLInputElement {
   }
 
   onLostFocus(event: Event) {
-    this._renderProps?.onUpdateBinding('value', (event?.target as HTMLInputElement)?.value);
+    this._renderProps?.onExecuteEvent('OnChange', [(event?.target as HTMLInputElement)?.value]);
   }
 
   onChange(event: Event) {
-    this._renderProps?.onExecuteEvent('OnChange', [(event?.target as HTMLInputElement)?.value]);
+    this._renderProps?.onUpdateBinding('value', (event?.target as HTMLInputElement)?.value);
   }
 
   onKeyUp(ev: KeyboardEvent) {

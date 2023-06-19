@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'integer input',
     icon: 'hashtag',
     element: {
-      name: ComponentTypes.INPUT_INTEGER,
+      name: 'inputInteger',
       type: ComponentTypes.INPUT_INTEGER,
       elements: [],
       attributes: [],

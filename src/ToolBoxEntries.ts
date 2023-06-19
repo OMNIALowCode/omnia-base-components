@@ -309,20 +309,20 @@ const basicCardRecipe: ToolBoxEntry = {
   name: 'basic Card',
   icon: 'square-o',
   element: {
-    name: 'Card',
+    name: 'card',
     type: ComponentTypes.PANEL,
     groupElements: true,
     elements: [
       {
-        name: 'CardHeader',
+        name: 'cardHeader',
         type: ComponentTypes.PANEL,
         elements: [
           {
-            name: 'CardHeaderLeft',
+            name: 'cardHeaderLeft',
             type: ComponentTypes.PANEL,
             elements: [
               {
-                name: 'CardHeaderText',
+                name: 'cardHeaderText',
                 type: ComponentTypes.TEXT,
                 elements: [],
                 attributes: [
@@ -347,11 +347,11 @@ const basicCardRecipe: ToolBoxEntry = {
             groupElements: false,
           },
           {
-            name: 'CardHeaderRight',
+            name: 'cardHeaderRight',
             type: ComponentTypes.PANEL,
             elements: [
               {
-                name: 'CardHeaderIcon',
+                name: 'cardHeaderIcon',
                 type: ComponentTypes.ICON,
                 elements: [],
                 attributes: [
@@ -432,7 +432,7 @@ const basicCardRecipe: ToolBoxEntry = {
             type: ComponentTypes.BUTTON,
             elements: [
               {
-                name: 'Button_Icon',
+                name: 'buttonIcon',
                 type: ComponentTypes.ICON,
                 elements: [],
                 attributes: [
@@ -452,7 +452,7 @@ const basicCardRecipe: ToolBoxEntry = {
                 groupElements: false,
               },
               {
-                name: 'Button_Text',
+                name: 'buttonText',
                 type: ComponentTypes.TEXT,
                 elements: [],
                 attributes: [
@@ -587,7 +587,7 @@ const imageCardRecipe: ToolBoxEntry = {
         type: ComponentTypes.BUTTON,
         elements: [
           {
-            name: 'Button_Icon',
+            name: 'buttonIcon',
             type: ComponentTypes.ICON,
             elements: [],
             attributes: [
@@ -607,7 +607,7 @@ const imageCardRecipe: ToolBoxEntry = {
             groupElements: false,
           },
           {
-            name: 'Button_Text',
+            name: 'buttonText',
             type: ComponentTypes.TEXT,
             elements: [],
             attributes: [
@@ -651,19 +651,19 @@ const tileRecipe: ToolBoxEntry = {
   name: 'tile',
   icon: 'window-close-o',
   element: {
-    name: 'Card',
+    name: 'card',
     type: ComponentTypes.PANEL,
     elements: [
       {
-        name: 'CardHeader',
+        name: 'cardHeader',
         type: ComponentTypes.PANEL,
         elements: [
           {
-            name: 'CardHeaderLeft',
+            name: 'cardHeaderLeft',
             type: ComponentTypes.PANEL,
             elements: [
               {
-                name: 'CardHeaderText',
+                name: 'cardHeaderText',
                 type: ComponentTypes.TEXT,
                 elements: [],
                 attributes: [
@@ -688,11 +688,11 @@ const tileRecipe: ToolBoxEntry = {
             groupElements: false,
           },
           {
-            name: 'CardHeaderRight',
+            name: 'cardHeaderRight',
             type: ComponentTypes.PANEL,
             elements: [
               {
-                name: 'CardHeaderIcon',
+                name: 'cardHeaderIcon',
                 type: ComponentTypes.ICON,
                 elements: [],
                 attributes: [
@@ -730,11 +730,11 @@ const tileRecipe: ToolBoxEntry = {
         type: ComponentTypes.PANEL,
         elements: [
           {
-            name: 'ContainerNumber',
+            name: 'containerNumber',
             type: ComponentTypes.PANEL,
             elements: [
               {
-                name: 'ContainerNumberText',
+                name: 'containerNumberText',
                 type: ComponentTypes.TEXT,
                 elements: [],
                 attributes: [
@@ -767,11 +767,11 @@ const tileRecipe: ToolBoxEntry = {
             groupElements: false,
           },
           {
-            name: 'ContainerMessage',
+            name: 'containerMessage',
             type: ComponentTypes.PANEL,
             elements: [
               {
-                name: 'ContainerMessageText',
+                name: 'containerMessageText',
                 type: ComponentTypes.TEXT,
                 elements: [],
                 attributes: [
@@ -813,11 +813,11 @@ const tileRecipe: ToolBoxEntry = {
         type: ComponentTypes.PANEL,
         elements: [
           {
-            name: 'Panel1',
+            name: 'panel1',
             type: ComponentTypes.PANEL,
             elements: [
               {
-                name: 'Text2',
+                name: 'text2',
                 type: ComponentTypes.TEXT,
                 elements: [],
                 attributes: [
@@ -837,7 +837,7 @@ const tileRecipe: ToolBoxEntry = {
                 groupElements: false,
               },
               {
-                name: 'Text3',
+                name: 'text3',
                 type: ComponentTypes.TEXT,
                 elements: [],
                 attributes: [

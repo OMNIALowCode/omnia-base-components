@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'boolean input',
     icon: 'hashtag',
     element: {
-      name: ComponentTypes.INPUT_BOOLEAN,
+      name: 'inputBoolean',
       type: ComponentTypes.INPUT_BOOLEAN,
       elements: [],
       attributes: [],

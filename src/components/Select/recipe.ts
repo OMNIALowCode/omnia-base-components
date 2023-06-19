@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'select',
     icon: 'list',
     element: {
-      name: ComponentTypes.SELECT,
+      name: 'select',
       type: ComponentTypes.SELECT,
       elements: [],
       attributes: [

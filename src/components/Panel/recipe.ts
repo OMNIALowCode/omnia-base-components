@@ -5,7 +5,7 @@ const panelRecipe: ToolBoxEntry = {
   name: 'panel',
   icon: 'wpforms',
   element: {
-    name: ComponentTypes.PANEL,
+    name: 'panel',
     type: ComponentTypes.PANEL,
     elements: [],
     attributes: [],
@@ -22,7 +22,7 @@ const rightPanelRecipe: ToolBoxEntry = {
   name: 'right row',
   icon: 'align-right',
   element: {
-    name: 'RightRow',
+    name: 'rightRow',
     type: ComponentTypes.PANEL,
     elements: [],
     attributes: [],
@@ -39,7 +39,7 @@ const centerPanelRecipe: ToolBoxEntry = {
   name: 'center row',
   icon: 'align-center',
   element: {
-    name: 'CenterRow',
+    name: 'centerRow',
     type: ComponentTypes.PANEL,
     elements: [],
     attributes: [],
@@ -56,11 +56,11 @@ const twoColumnsRecipe: ToolBoxEntry = {
   name: 'two columns',
   icon: 'columns',
   element: {
-    name: 'TwoRow',
+    name: 'twoRow',
     type: ComponentTypes.PANEL,
     elements: [
       {
-        name: 'TwoRowLeft',
+        name: 'twoRowLeft',
         type: ComponentTypes.PANEL,
         elements: [],
         attributes: [],
@@ -72,7 +72,7 @@ const twoColumnsRecipe: ToolBoxEntry = {
         groupElements: false,
       },
       {
-        name: 'TwoRowRight',
+        name: 'twoRowRight',
         type: ComponentTypes.PANEL,
         elements: [],
         attributes: [],

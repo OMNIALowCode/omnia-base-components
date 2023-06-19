@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'text input',
     icon: 'pencil-square-o',
     element: {
-      name: ComponentTypes.INPUT,
+      name: 'input',
       type: ComponentTypes.INPUT,
       elements: [],
       attributes: [

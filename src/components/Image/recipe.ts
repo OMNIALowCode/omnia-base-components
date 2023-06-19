@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'image',
     icon: 'picture-o',
     element: {
-      name: ComponentTypes.IMAGE,
+      name: 'image',
       type: ComponentTypes.IMAGE,
       elements: [],
       attributes: [],

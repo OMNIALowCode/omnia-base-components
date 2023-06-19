@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'textarea input',
     icon: 'file-text-o',
     element: {
-      name: ComponentTypes.INPUT_TEXTAREA,
+      name: 'inputTextArea',
       type: ComponentTypes.INPUT_TEXTAREA,
       elements: [],
       attributes: [],

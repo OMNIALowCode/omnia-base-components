@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'fileupload',
     icon: 'floppy-o',
     element: {
-      name: ComponentTypes.FILE_UPLOAD,
+      name: 'fileUpload',
       type: ComponentTypes.FILE_UPLOAD,
       elements: [],
       attributes: [
@@ -18,13 +18,6 @@ const recipes: ToolBoxEntry[] = [
         },
         {
           key: 'readOnly',
-          value: {
-            source: ToolBoxEntryAttributeValueSource.Direct,
-            value: false,
-          },
-        },
-        {
-          key: 'multiple',
           value: {
             source: ToolBoxEntryAttributeValueSource.Direct,
             value: false,
