@@ -8,6 +8,7 @@ type SelectOptionType = {
 
 class Select extends HTMLSelectElement {
   private _renderProps?: ExternalElementNodePropsType;
+
   constructor() {
     super();
     this.onchange = this.onUpdate.bind(this);
