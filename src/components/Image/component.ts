@@ -52,7 +52,6 @@ class Image extends HTMLImageElement {
       this.title = title;
       this.alt = title;
     }
-    this.alt = title;
   }
 
   loadOmniaImage() {
