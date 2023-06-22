@@ -3,11 +3,17 @@ import { getReadOnly, getValue } from '../../helpers';
 
 class InputDate extends HTMLInputElement {
   private _renderProps?: ExternalElementNodePropsType;
+  private valueChange: boolean;
 
   constructor() {
     super();
+
     this.type = 'date';
     this.onblur = this.onLostFocus.bind(this);
+    this.onfocus = this.onFocus.bind(this);
+    this.onchange = this.onChange.bind(this);
+
+    this.valueChange = false;
   }
 
   setRenderProps(renderProps: ExternalElementNodePropsType) {
@@ -22,19 +28,28 @@ class InputDate extends HTMLInputElement {
     this.valueAsDate = isNaN(date) ? null : date;
   }
 
+  onFocus() {
+    this.valueChange = false;
+  }
+
+  onChange() {
+    this.valueChange = true;
+  }
+
   onLostFocus() {
-    this._renderProps?.onUpdateBindingArrayAndExecuteEvent(
-      [
+    if (this.valueChange)
+      this._renderProps?.onUpdateBindingArrayAndExecuteEvent(
+        [
+          {
+            key: 'value',
+            value: this.valueAsDate,
+          },
+        ],
         {
-          key: 'value',
-          value: this.valueAsDate,
+          name: 'OnChange',
+          parameters: [this.valueAsDate],
         },
-      ],
-      {
-        name: 'OnChange',
-        parameters: [this.valueAsDate],
-      },
-    );
+      );
   }
 }
 
