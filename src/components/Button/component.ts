@@ -3,6 +3,7 @@ import { getAttributeValue } from '../helpers';
 
 class Button extends HTMLButtonElement {
   private onClickEvent?: () => void;
+
   constructor() {
     super();
     this.onclick = this.onClick.bind(this);

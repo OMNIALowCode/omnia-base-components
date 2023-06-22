@@ -5,11 +5,11 @@ const recipes: ToolBoxEntry[] = [
     name: 'table head',
     icon: 'table',
     element: {
-      name: ComponentTypes.TABLE_HEAD,
+      name: 'tableHead',
       type: ComponentTypes.TABLE_HEAD,
       elements: [
         {
-          name: 'TableRow',
+          name: 'tableRow',
           type: ComponentTypes.TABLE_ROW,
           elements: [],
           attributes: [],

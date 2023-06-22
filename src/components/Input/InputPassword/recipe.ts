@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'password input',
     icon: 'key',
     element: {
-      name: ComponentTypes.INPUT_PASSWORD,
+      name: 'inputPassword',
       type: ComponentTypes.INPUT_PASSWORD,
       elements: [],
       attributes: [],

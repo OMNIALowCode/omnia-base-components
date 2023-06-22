@@ -2,12 +2,12 @@ import { ExternalElementNodePropsType } from 'omnia-component-framework';
 import { getValue } from '../helpers';
 
 class Text extends HTMLSpanElement {
+  private onClickEvent?: () => void;
+
   constructor() {
     super();
     this.onclick = this.onClick.bind(this);
   }
-
-  private onClickEvent?: () => void;
 
   setRenderProps(renderProps: ExternalElementNodePropsType) {
     this.removeAttribute('style');

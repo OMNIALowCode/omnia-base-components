@@ -3,16 +3,11 @@ import { getAttributeValue, getReadOnly, getValue } from '../../helpers';
 
 class InputDecimal extends HTMLInputElement {
   private _renderProps?: ExternalElementNodePropsType;
-  private timeoutReference: NodeJS.Timeout | undefined;
-  private timeout: number;
 
   constructor() {
     super();
     this.type = 'number';
-    this.onblur = this.onLostFocus.bind(this);
     this.onchange = this.onChange.bind(this);
-    this.onkeyup = this.onKeyUp.bind(this);
-    this.timeout = 5e2;
   }
 
   setRenderProps(renderProps: ExternalElementNodePropsType) {
@@ -32,20 +27,20 @@ class InputDecimal extends HTMLInputElement {
   }
 
   onChange(event: Event) {
-    this._renderProps?.onUpdateBinding('value', (event?.target as HTMLInputElement)?.valueAsNumber);
-  }
+    const value = (event?.target as HTMLInputElement)?.valueAsNumber;
 
-  onLostFocus(event: Event) {
-    this._renderProps?.onExecuteEvent('OnChange', [(event?.target as HTMLInputElement)?.valueAsNumber]);
-  }
-
-  onKeyUp(ev: KeyboardEvent) {
-    if (this.timeoutReference) clearTimeout(this.timeoutReference);
-    if (ev.key === 'Tab') return;
-    const input = this;
-    this.timeoutReference = setTimeout(function () {
-      input._renderProps?.onUpdateBinding('value', input.valueAsNumber);
-    }, this.timeout);
+    this._renderProps?.onUpdateBindingArrayAndExecuteEvent(
+      [
+        {
+          key: 'value',
+          value: value,
+        },
+      ],
+      {
+        name: 'OnChange',
+        parameters: [value],
+      },
+    );
   }
 }
 

@@ -33,7 +33,13 @@ class Image extends HTMLImageElement {
     const environment = renderProps?.tenant?.environment ?? '';
 
     if (url) {
-      if (url != this.omniaUrl || token != this.token || tenant != this.tenant || environment != this.environment) {
+      if (renderProps.isEdit) this.src = emptyImage;
+      else if (
+        url != this.omniaUrl ||
+        token != this.token ||
+        tenant != this.tenant ||
+        environment != this.environment
+      ) {
         this.omniaUrl = url;
         this.token = token;
         this.tenant = tenant;
@@ -42,8 +48,10 @@ class Image extends HTMLImageElement {
       }
     } else this.src = isNullOrEmpty(src) ? emptyImage : src;
 
-    this.title = title;
-    this.alt = title;
+    if (title) {
+      this.title = title;
+      this.alt = title;
+    }
   }
 
   loadOmniaImage() {
@@ -56,11 +64,18 @@ class Image extends HTMLImageElement {
         Authorization: `Bearer ${this.token}`,
       }),
     })
-      .then(response => response.blob())
+      .then(response => {
+        if (response.ok) return response.blob();
+        throw new Error(response.statusText);
+      })
       .then(blob => {
         const reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onload = ev => (_this.src = (ev.target?.result as string) ?? emptyImage);
+      })
+      .catch((error: any) => {
+        this.src = emptyImage;
+        console.error(error);
       });
   }
 }

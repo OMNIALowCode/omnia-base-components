@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'table head cell',
     icon: 'table',
     element: {
-      name: ComponentTypes.TABLE_HEAD_CELL,
+      name: 'tableHeadCell',
       type: ComponentTypes.TABLE_HEAD_CELL,
       elements: [],
       attributes: [],

@@ -2,10 +2,10 @@ import { ToolBoxEntry, ToolBoxEntryAttributeValueSource } from 'omnia-component-
 import ComponentTypes from '../../all-types';
 const recipes: ToolBoxEntry[] = [
   {
-    name: 'date input',
+    name: 'date Input',
     icon: 'hashtag',
     element: {
-      name: ComponentTypes.INPUT_DATE,
+      name: 'inputDate',
       type: ComponentTypes.INPUT_DATE,
       elements: [],
       attributes: [],

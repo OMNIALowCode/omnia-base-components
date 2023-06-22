@@ -5,11 +5,11 @@ const recipes: ToolBoxEntry[] = [
     name: 'button',
     icon: 'toggle-on',
     element: {
-      name: ComponentTypes.BUTTON,
+      name: 'button',
       type: ComponentTypes.BUTTON,
       elements: [
         {
-          name: 'Icon',
+          name: 'icon',
           type: ComponentTypes.ICON,
           elements: [],
           attributes: [
@@ -29,7 +29,7 @@ const recipes: ToolBoxEntry[] = [
           groupElements: false,
         },
         {
-          name: 'Text',
+          name: 'text',
           type: ComponentTypes.TEXT,
           elements: [],
           attributes: [

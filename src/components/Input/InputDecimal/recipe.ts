@@ -5,7 +5,7 @@ const recipes: ToolBoxEntry[] = [
     name: 'decimal input',
     icon: 'hashtag',
     element: {
-      name: ComponentTypes.INPUT_DECIMAL,
+      name: 'inputDecimal',
       type: ComponentTypes.INPUT_DECIMAL,
       elements: [],
       attributes: [],

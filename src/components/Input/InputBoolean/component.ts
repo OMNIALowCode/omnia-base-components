@@ -2,13 +2,13 @@ import { ExternalElementNodePropsType } from 'omnia-component-framework';
 import { getReadOnly, getValue } from '../../helpers';
 
 class InputBoolean extends HTMLInputElement {
+  private _renderProps?: ExternalElementNodePropsType;
+
   constructor() {
     super();
     this.type = 'checkbox';
     this.onchange = this.onChange.bind(this);
   }
-
-  private _renderProps?: ExternalElementNodePropsType;
 
   setRenderProps(renderProps: ExternalElementNodePropsType) {
     this.removeAttribute('style');
