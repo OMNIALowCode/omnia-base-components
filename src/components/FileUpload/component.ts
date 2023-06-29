@@ -1,6 +1,7 @@
 import { ExternalElementNodePropsType, onUpdateBindingType } from 'omnia-component-framework';
 import { getAttributeValue } from '../helpers';
 import {
+  deleteFile,
   downloadFile,
   endpoint,
   getButton,
@@ -121,7 +122,10 @@ class FileUpload extends HTMLElement {
   }
 
   onFileRemove(file: string) {
-    return this.deleteFile(file);
+    return deleteFile(file, this._settings.tenant, this._settings.environment, this._settings.token).then(() => {
+      this._settings.files = this._settings.files.filter(fName => fName !== file);
+      this.updateValue(this._settings.files.join(';'));
+    });
   }
 
   onAddFile(event: Event) {
@@ -147,23 +151,6 @@ class FileUpload extends HTMLElement {
         this.onFileDownload,
         this.onFileRemove,
       );
-  }
-
-  async deleteFile(file: string) {
-    const fileNameSplit = file.split('/');
-    const fileName = fileNameSplit.length > 1 ? fileNameSplit[1] : fileNameSplit[0];
-    const originalCode = fileNameSplit[0];
-    const url = `${endpoint(originalCode, this._settings)}/${fileName}`;
-
-    return fetch(url, {
-      method: 'DELETE',
-      headers: new Headers({
-        Authorization: 'Bearer ' + this._settings.token,
-      }),
-    }).then(() => {
-      this._settings.files = this._settings.files.filter(fName => fName !== file);
-      this.updateValue(this._settings.files.join(';'));
-    });
   }
 
   save() {
