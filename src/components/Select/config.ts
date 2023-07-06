@@ -1,6 +1,7 @@
 import {
   BooleanPropertyConfiguration,
   ElementNodeConfiguration,
+  ObjectPropertyConfiguration,
   PROPERTY_DATA_TYPE,
   PROPERTY_DIRECTIONS,
 } from 'omnia-component-framework';
@@ -14,7 +15,8 @@ const Select: ElementNodeConfiguration = {
       isCollection: true,
       direction: PROPERTY_DIRECTIONS.INBOUND,
       dataType: PROPERTY_DATA_TYPE.OBJECT,
-    },
+      typeName: 'SelectOption',
+    } as ObjectPropertyConfiguration,
     {
       key: 'value',
       direction: PROPERTY_DIRECTIONS.TWO_WAY,

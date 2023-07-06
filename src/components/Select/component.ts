@@ -1,10 +1,6 @@
 import { ExternalElementNodePropsType } from 'omnia-component-framework';
 import { getAttributeValue, getReadOnly, getValue } from '../helpers';
-
-type SelectOptionType = {
-  label: string;
-  key: string;
-};
+import { SelectOption } from './types';
 
 class Select extends HTMLSelectElement {
   private _renderProps?: ExternalElementNodePropsType;
@@ -19,16 +15,10 @@ class Select extends HTMLSelectElement {
     this.className = renderProps.className;
     Object.assign(this.style, renderProps.style);
     this.innerHTML = '';
-    const attributeOptions: (SelectOptionType | string)[] = getAttributeValue(renderProps.attributes, 'options', []);
+    const attributeOptions: SelectOption[] = getAttributeValue(renderProps.attributes, 'options', []);
 
     if (Array.isArray(attributeOptions))
-      attributeOptions.forEach(option =>
-        this.options.add(
-          typeof option === 'object' && option !== null
-            ? new Option(option?.label, option?.key)
-            : new Option(option, option),
-        ),
-      );
+      attributeOptions.forEach(option => this.options.add(new Option(option?.label, option?.key)));
 
     this.value = getValue(renderProps.attributes);
     this._renderProps = renderProps;
