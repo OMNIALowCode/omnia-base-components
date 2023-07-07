@@ -2834,9 +2834,9 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.npmjs.org/obuf/-/obuf-1.1.2.tgz"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-"omnia-component-framework@file:./omnia-low-code-component-framework-v1.0.9.tgz":
+"omnia-component-framework@file:./omnia-low-code-component-framework-v1.0.17.tgz":
   version "0.0.3"
-  resolved "file:./omnia-low-code-component-framework-v1.0.9.tgz#de13b4a4fd91c040c22c6f477c0ab962736220a0"
+  resolved "file:./omnia-low-code-component-framework-v1.0.17.tgz#ca996cabd32934cd34c910be1b83c187ff8e8102"
   dependencies:
     "@babel/core" "7.16.7"
     "@typescript-eslint/eslint-plugin" "5.8.1"
