@@ -14,7 +14,7 @@
     "deploy-w": "yarn clean && yarn build-w && yarn pack"
   },
   "dependencies": {
-    "omnia-component-framework": "file:./omnia-low-code-component-framework-v1.0.17.tgz"
+    "omnia-component-framework": "file:./omnia-low-code-component-framework-v1.0.26.tgz"
   },
   "devDependencies": {
     "run-script-os": "1.1.6"

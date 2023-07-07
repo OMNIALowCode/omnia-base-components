@@ -1,16 +1,16 @@
-import { TYPE_ATTRIBUTE_TYPE, Type } from 'omnia-component-framework';
+import { TYPE_PROPERTY_TYPE, Type } from 'omnia-component-framework';
 
 export const types: Type[] = [
   {
     name: 'SelectOption',
-    attributes: [
+    properties: [
       {
         name: 'label',
-        type: TYPE_ATTRIBUTE_TYPE.TEXT,
+        type: TYPE_PROPERTY_TYPE.TEXT,
       },
       {
         name: 'key',
-        type: TYPE_ATTRIBUTE_TYPE.TEXT,
+        type: TYPE_PROPERTY_TYPE.TEXT,
       },
     ],
   },
