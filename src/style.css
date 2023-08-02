@@ -66,8 +66,10 @@
   display: inline-block;
   padding: 8px;
   width: 100%;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
 }
 
 .omniabasecomponent-panel-page {

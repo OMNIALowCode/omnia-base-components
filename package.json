@@ -7,14 +7,14 @@
     "build:default": "omnia-components-cli --build",
     "build:linux:darwin": "omnia-components-cli-release --build",
     "generate": "omnia-components-cli --generate",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist && rimraf omnia-base-components*",
     "uninstall": "rimraf node_modules",
     "pack": "yarn pack",
     "deploy": "yarn clean && yarn build && yarn pack",
     "deploy-w": "yarn clean && yarn build-w && yarn pack"
   },
   "dependencies": {
-    "omnia-component-framework": "0.0.3"
+    "omnia-component-framework": "0.0.4"
   },
   "devDependencies": {
     "run-script-os": "1.1.6"

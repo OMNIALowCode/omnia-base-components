@@ -250,7 +250,8 @@ const paginationRecipe: ToolBoxEntry = {
           {
             key: 'options',
             value: {
-              value: 'return [10, 20, 50, 100];',
+              value:
+                '    return [\r\n        { key: 10, label: 10 },\r\n        { key: 25, label: 25 },\r\n        { key: 50, label: 50 },\r\n        { key: 100, label: 100 }\r\n    ]',
               source: ToolBoxEntryAttributeValueSource.Expression,
             },
           },
