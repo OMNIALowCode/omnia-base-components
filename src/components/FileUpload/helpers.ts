@@ -272,3 +272,14 @@ export function downloadFile(file: string, tenant: string, environment: string, 
       document.body.removeChild(a);
     });
 }
+
+export async function deleteFile(file: string, tenant: string, environment: string, token: string) {
+  const url = `${baseUrl}${tenant}/${environment}/application/${file}`;
+
+  return fetch(url, {
+    method: 'DELETE',
+    headers: new Headers({
+      Authorization: 'Bearer ' + token,
+    }),
+  });
+}
