@@ -4,7 +4,7 @@
 
 Component that renders a date input, for users to introduce a date.
 
-The date can be introduced manually, or picked using a date picker.
+The date can be introduced manually, or selected using a date picker.
 
 When used in the context of an entity form, this component is usually bound to a model attribute.
 
