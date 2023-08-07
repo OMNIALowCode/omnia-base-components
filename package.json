@@ -14,7 +14,7 @@
     "deploy-w": "yarn clean && yarn build-w && yarn pack"
   },
   "dependencies": {
-    "omnia-component-framework": "0.0.4"
+    "omnia-component-framework": "0.0.5"
   },
   "devDependencies": {
     "run-script-os": "1.1.6"

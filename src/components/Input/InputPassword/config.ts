@@ -8,7 +8,7 @@ import ComponentTypes from '../../all-types';
 import { baseProperties } from '../BaseProperties';
 const valueProperty: TextPropertyConfiguration = {
   key: 'value',
-  dataType: PROPERTY_DATA_TYPE.TEXT,
+  dataType: PROPERTY_DATA_TYPE.TEXTVALUE,
   isCollection: false,
   defaultValue: '',
   direction: PROPERTY_DIRECTIONS.TWO_WAY,

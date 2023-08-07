@@ -13,7 +13,7 @@ const Image: ElementNodeConfiguration = {
     {
       key: 'omniaUrl',
       isRequired: false,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
+      dataType: PROPERTY_DATA_TYPE.TEXTVALUE,
       direction: PROPERTY_DIRECTIONS.INBOUND,
     },
     {
