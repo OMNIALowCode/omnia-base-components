@@ -21,7 +21,7 @@ const Link: ElementNodeConfiguration = {
     {
       key: 'link',
       isReadOnly: false,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
+      dataType: PROPERTY_DATA_TYPE.TEXTVALUE,
       isCollection: false,
       defaultValue: '',
       direction: PROPERTY_DIRECTIONS.INBOUND,

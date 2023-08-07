@@ -13,7 +13,7 @@ const FileUpload: ElementNodeConfiguration = {
     {
       key: 'value',
       direction: PROPERTY_DIRECTIONS.INBOUND,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
+      dataType: PROPERTY_DATA_TYPE.TEXTVALUE,
       defaultValue: '',
     } as TextPropertyConfiguration,
     {
@@ -31,12 +31,12 @@ const FileUpload: ElementNodeConfiguration = {
     {
       key: 'accept',
       direction: PROPERTY_DIRECTIONS.INBOUND,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
+      dataType: PROPERTY_DATA_TYPE.TEXTVALUE,
     } as BooleanPropertyConfiguration,
     {
       key: 'entity',
       direction: PROPERTY_DIRECTIONS.INBOUND,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
+      dataType: PROPERTY_DATA_TYPE.TEXTVALUE,
       isRequired: true,
     } as TextPropertyConfiguration,
     {
