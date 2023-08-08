@@ -4,9 +4,9 @@
 
 Component that renders a table header.
 
-This component is used as a child of the Table component, and usually renders headers for table columns.
+This component is used as a child of the [Table](../../Table/) component and acts as a container for other components. By default it renders headers for table columns.
 
-The table header is composed by a TableRow component, that contains itself a number of other components.
+The table header is composed by a [TableRow](../TableRow/) component, that contains itself a number of other components.
 
 # Attributes
 

@@ -4,9 +4,9 @@
 
 Component that renders a table cell.
 
-This component is used as a child of the Table Row component.
+This component is used as a child of the [TableRow](../TableRow/) component.
 
-The table cell can have child components, like Inputs to insert data, or Buttons to take an action.
+The table cell can have child components, like [Inputs](../../Input/) to insert data, or [Buttons](../../Button/) to take an action.
 
 # Attributes
 

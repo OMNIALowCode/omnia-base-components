@@ -8,7 +8,7 @@ When used in the context of an entity form, this component is usually bound to a
 
 It can also be used only for data visualization.
 
-The table is composed by three different areas, that are also components: TableHead, TableBody and TableFoot. Any of there elements can be changed or removed
+The table is composed by three different areas, that are also components: [TableHead](TableHead/), [TableBody](TableBody/) and [TableFoot](TableFoot/). Any of there elements can be changed or removed.
 
 # Attributes
 

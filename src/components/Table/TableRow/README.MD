@@ -4,9 +4,9 @@
 
 Component that renders a table row.
 
-This component is used as a child of the Table Head, Body or Foot component, and renders a row in any of these areas.
+This component is used as a child of the [Table Head](../TableHead/), [Body](../TableBody/) or [Foot](../TableFoot/) component, and renders a row in any of these areas.
 
-The table row can have multiple child components, like Text, Inputs or Buttons.
+The table row can have multiple child components, like [Text](../../Text/), [Inputs](../../Input/) or [Buttons](../../Button/).
 
 # Attributes
 

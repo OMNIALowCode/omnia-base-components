@@ -2,7 +2,7 @@
 
 # Description
 
-This component renders a Button element, containing an Icon and a Text.
+This component renders a Button element, that is composed by two other components: [Icon](../Icon/) and [Text](../Text/).
 
 The style of the button can be changed, and a OnClick behaviour is available.
 
@@ -10,7 +10,7 @@ The style of the button can be changed, and a OnClick behaviour is available.
 
 | Attribute | Description                                                |
 | --------- | ---------------------------------------------------------- |
-| disabled  | Boolean to indicate if the button is available or disabled |
+| disabled  | Boolean to indicate if the button is clickable or disabled |
 
 # Behaviours
 

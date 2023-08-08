@@ -1,12 +1,12 @@
-# Table Head Component Documentation
+# Table Head Cell Component Documentation
 
 # Description
 
 Component that renders a table header cell.
 
-This component is used as a child of the Table component, and usually renders headers for table columns.
+This component is used as a child of the [TableRow] component, and usually renders a header for a specific table columns.
 
-The table header cell can have child components, like Text to show the column label.
+The table header cell can have child components, like [Text](../../Text/) to show the column label.
 
 # Attributes
 

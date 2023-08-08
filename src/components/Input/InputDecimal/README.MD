@@ -13,8 +13,8 @@ When used in the context of an entity form, this component is usually bound to a
 | value         | The value shown in the input.                             |
 | readOnly      | Boolean to indicate if the rendered element is read only. |
 | decimalPlaces | The number of decimal places for this input.              |
-| minimumValue  | The minimum value for the input.                          |
-| maximumValue  | The maximum value for the input.                          |
+| minimumValue  | The minimum decimal value for the input.                  |
+| maximumValue  | The maximum decimal value for the input.                  |
 
 # Behaviours
 

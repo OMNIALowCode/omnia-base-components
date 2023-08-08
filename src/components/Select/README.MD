@@ -2,9 +2,9 @@
 
 # Description
 
-Component that renders a selectbox, for users to select a value from a limited number of choices.
+Component that renders a SelectBox, for users to select a value from a limited number of choices.
 
-When used in the context of an entity form, this component is usually bound to a model attribute. The values can be obtained from a model Enumeration, using a Selector component as the data source.
+When used in the context of an entity form, this component is usually bound to a model attribute. The values can be obtained from a previously modeled Enumeration, using OMNIA base component Selector as the data source.
 
 # Attributes
 

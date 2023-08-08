@@ -2,7 +2,7 @@
 
 # Description
 
-Component that render an image.
+Component that renders an image.
 
 There are multiple possible sources for the image. It can be a model Asset, a reference to a file or an image encoded to Base64.
 

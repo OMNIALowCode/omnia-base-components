@@ -2,7 +2,7 @@
 
 # Description
 
-Component that can have multiple child elements rendered as links.
+Component that acts as a container for other elements. These elements will be rendered as links.
 
 # Attributes
 

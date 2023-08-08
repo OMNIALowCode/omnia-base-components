@@ -4,7 +4,7 @@
 
 Component that renders an Icon.
 
-The icon must be a Font Awesome icon and can have a OnClick Behaviour.
+The icon must be a [Font Awesome v4.7 icon](https://fontawesome.com/icons) and can have a OnClick Behaviour.
 
 # Attributes
 

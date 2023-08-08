@@ -4,7 +4,9 @@
 
 Component to upload and download files.
 
-The component renders a button that when clicked opens a modal that allows the upload of a new file, list and remove previously uploaded files.
+The component renders a button that, when clicked, opens a modal that allows the upload of a new file. It also allows the list and removal of previously uploaded files.
+
+The component value must be bound to a text attribute.
 
 # Attributes
 

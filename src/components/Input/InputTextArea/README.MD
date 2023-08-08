@@ -2,7 +2,7 @@
 
 # Description
 
-Component that renders a textarea input, for users to introduce multiline string values.
+Component that renders a textarea input, for users to introduce multiline text values.
 
 When used in the context of an entity form, this component is usually bound to a model attribute.
 
