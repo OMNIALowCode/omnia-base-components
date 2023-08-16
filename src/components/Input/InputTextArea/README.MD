@@ -14,8 +14,8 @@ When used in the context of an entity form, this component is usually bound to a
 | readOnly  | Boolean to indicate if the rendered element is read only. |
 | rows      | The number of rows visible by default.                    |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                              |
-| --------- | ------------------------------------------------------------------------ |
-| OnChange  | Javascript code expression to be executed when the text value is changed |
+| Event    | Description                                            |
+| -------- | ------------------------------------------------------ |
+| OnChange | This event is triggered when the text value is changed |

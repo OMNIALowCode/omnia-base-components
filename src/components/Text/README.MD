@@ -12,8 +12,8 @@ When used in the context of an entity form as a label, this component is usually
 | --------- | ------------------------ |
 | value     | The value shown as text. |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                        |
-| --------- | ------------------------------------------------------------------ |
-| OnClick   | Javascript code expression to be executed when the text is clicked |
+| Event   | Description                                      |
+| ------- | ------------------------------------------------ |
+| OnClick | This event is triggered when the text is clicked |

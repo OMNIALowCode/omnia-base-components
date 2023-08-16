@@ -12,6 +12,6 @@ The table header is composed by a [TableRow](../TableRow/) component, that conta
 
 There are no Attributes associated with this Component.
 
-# Behaviours
+# Events
 
-There are no Behaviours associated with this Component.
+There are no Events associated with this Component.

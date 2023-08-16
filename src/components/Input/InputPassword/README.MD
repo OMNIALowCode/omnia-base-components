@@ -15,8 +15,8 @@ The inserted values are not encrypted. If a encryption is intended, it must be i
 | value     | The value shown in the input. Since the password is a protected value, the characters will be replaced by dots |
 | readOnly  | Boolean to indicate if the rendered element is read only.                                                      |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                                  |
-| --------- | ---------------------------------------------------------------------------- |
-| OnChange  | Javascript code expression to be executed when the password value is changed |
+| Event    | Description                                                |
+| -------- | ---------------------------------------------------------- |
+| OnChange | This event is triggered when the password value is changed |

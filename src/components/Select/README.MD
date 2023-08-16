@@ -8,14 +8,23 @@ When used in the context of an entity form, this component is usually bound to a
 
 # Attributes
 
-| Attribute | Description                                               |
-| --------- | --------------------------------------------------------- |
-| options   | The options available to be selected.                     |
-| value     | The selected value.                                       |
-| readOnly  | Boolean to indicate if the rendered element is read only. |
+| Attribute | Description                                                   |
+| --------- | ------------------------------------------------------------- |
+| options   | The list of [options](#selectoption) available to be selected |
+| value     | A string that represents the selected value.                  |
+| readOnly  | Boolean to indicate if the rendered element is read only.     |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                                |
-| --------- | -------------------------------------------------------------------------- |
-| OnSelect  | Javascript code expression to be executed when a select option is selected |
+| Event    | Description                                              |
+| -------- | -------------------------------------------------------- |
+| OnSelect | This event is triggered when a select option is selected |
+
+# Types
+
+## SelectOption
+
+| Property | Description                    |
+| -------- | ------------------------------ |
+| key      | The key of the select option   |
+| label    | The label of the select option |

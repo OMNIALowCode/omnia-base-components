@@ -10,6 +10,6 @@ Panels are used mostly for UI attributes organization. Since it is used as a con
 
 There are no Attributes associated with this Component.
 
-# Behaviours
+# Events
 
-There are no Behaviours associated with this Component.
+There are no Events associated with this Component.

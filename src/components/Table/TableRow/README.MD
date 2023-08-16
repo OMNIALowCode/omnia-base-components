@@ -12,6 +12,6 @@ The table row can have multiple child components, like [Text](../../Text/), [Inp
 
 There are no Attributes associated with this Component.
 
-# Behaviours
+# Events
 
-There are no Behaviours associated with this Component.
+There are no Events associated with this Component.

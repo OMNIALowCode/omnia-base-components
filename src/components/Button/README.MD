@@ -2,7 +2,7 @@
 
 # Description
 
-This component renders a Button element, that is composed by two other components: [Icon](../Icon/) and [Text](../Text/).
+This component is a container that renders a Button element, and by default has two other components: [Icon](../Icon/) and [Text](../Text/).
 
 The style of the button can be changed, and a OnClick behaviour is available.
 
@@ -12,8 +12,8 @@ The style of the button can be changed, and a OnClick behaviour is available.
 | --------- | ---------------------------------------------------------- |
 | disabled  | Boolean to indicate if the button is clickable or disabled |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                          |
-| --------- | -------------------------------------------------------------------- |
-| OnClick   | Javascript code expression to be executed when the button is clicked |
+| Event   | Description                                        |
+| ------- | -------------------------------------------------- |
+| OnClick | This event is triggered when the button is clicked |

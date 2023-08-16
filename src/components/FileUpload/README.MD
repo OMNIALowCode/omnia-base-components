@@ -23,6 +23,6 @@ The component value must be bound to a text attribute.
 | modalTitleLabel | The label shown as the modal title when uploading a file                   |
 | modalCloseLabel | The label shown on the modal close button                                  |
 
-# Behaviours
+# Events
 
-There are no Behaviours associated with this Component.
+There are no Events associated with this Component.

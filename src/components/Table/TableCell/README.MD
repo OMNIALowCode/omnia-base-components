@@ -14,6 +14,6 @@ The table cell can have child components, like [Inputs](../../Input/) to insert 
 | --------- | -------------------------------------------------------- |
 | colspan   | The number of columns the table header cell should span. |
 
-# Behaviours
+# Events
 
-There are no Behaviours associated with this Component.
+There are no Events associated with this Component.

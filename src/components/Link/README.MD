@@ -11,6 +11,6 @@ Component that acts as a container for other elements. These elements will be re
 | link      | The location to redirect when clicking the element.                                                |
 | target    | Where the link is going to be opened. Possible values: \_self, \_blank, \_parent, \_top, framename |
 
-# Behaviours
+# Events
 
-There are no Behaviours associated with this Component.
+There are no Events associated with this Component.

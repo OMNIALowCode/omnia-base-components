@@ -14,6 +14,6 @@ There are multiple possible sources for the image. It can be a model Asset, a re
 | omniaUrl  | The Url of a file previously uploaded to Omnia.                                                               |
 | title     | The title of the image.                                                                                       |
 
-# Behaviours
+# Events
 
-There are no Behaviours associated with this Component.
+There are no Events associated with this Component.

@@ -12,8 +12,8 @@ The icon must be a [Font Awesome v4.7 icon](https://fontawesome.com/icons) and c
 | --------- | ---------------------------------------------------------------------------- |
 | value     | The identifier of the icon to be rendered. Must be a Font Awesome icon code. |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                        |
-| --------- | ------------------------------------------------------------------ |
-| OnClick   | Javascript code expression to be executed when the icon is clicked |
+| Event   | Description                                      |
+| ------- | ------------------------------------------------ |
+| OnClick | This event is triggered when the icon is clicked |

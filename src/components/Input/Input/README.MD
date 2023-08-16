@@ -13,8 +13,8 @@ When used in the context of an entity form, this component is usually bound to a
 | value     | The value shown in the input.                             |
 | readOnly  | Boolean to indicate if the rendered element is read only. |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                               |
-| --------- | ------------------------------------------------------------------------- |
-| OnChange  | Javascript code expression to be executed when the input value is changed |
+| Event    | Description                                             |
+| -------- | ------------------------------------------------------- |
+| OnChange | This event is triggered when the input value is changed |

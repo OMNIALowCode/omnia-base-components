@@ -14,8 +14,8 @@ The table header cell can have child components, like [Text](../../Text/) to sho
 | --------- | -------------------------------------------------------- |
 | colspan   | The number of columns the table header cell should span. |
 
-# Behaviours
+# Events
 
-| Behaviour | Description                                                                                                                 |
-| --------- | --------------------------------------------------------------------------------------------------------------------------- |
-| OnClick   | Javascript code expression to be executed when the header cell is clicked. It can be used for sorting for a specific column |
+| Event   | Description                                                                                               |
+| ------- | --------------------------------------------------------------------------------------------------------- |
+| OnClick | This event is triggered when the header cell is clicked. It can be used for sorting for a specific column |
