@@ -8,7 +8,6 @@ export { default as InputDate } from './Input/InputDate';
 export { default as InputDecimal } from './Input/InputDecimal';
 export { default as InputInteger } from './Input/InputInteger';
 export { default as InputPassword } from './Input/InputPassword';
-export { default as InputRadio } from './Input/InputRadio';
 export { default as InputTextArea } from './Input/InputTextArea';
 export { default as Link } from './Link';
 export { default as Panel } from './Panel';
