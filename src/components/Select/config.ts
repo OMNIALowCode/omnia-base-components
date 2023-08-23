@@ -20,7 +20,7 @@ const Select: ElementNodeConfiguration = {
     {
       key: 'value',
       direction: PROPERTY_DIRECTIONS.TWO_WAY,
-      dataType: PROPERTY_DATA_TYPE.TEXT,
+      dataType: PROPERTY_DATA_TYPE.TEXTVALUE,
     },
     {
       key: 'readOnly',
