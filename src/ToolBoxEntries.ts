@@ -307,7 +307,7 @@ const paginationRecipe: ToolBoxEntry = {
 };
 
 const basicCardRecipe: ToolBoxEntry = {
-  name: 'basic Card',
+  name: 'basic card',
   icon: 'square-o',
   element: {
     name: 'card',
@@ -381,7 +381,7 @@ const basicCardRecipe: ToolBoxEntry = {
         behaviours: [],
         classesStyles: {
           source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'row omniabasecomponent-card-header  omniabasecomponent-card-header-text',
+          value: 'card-header row m-0',
         },
         groupElements: false,
       },
@@ -420,7 +420,7 @@ const basicCardRecipe: ToolBoxEntry = {
         behaviours: [],
         classesStyles: {
           source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'omniabasecomponent-card-container',
+          value: 'card-body',
         },
         groupElements: false,
       },
@@ -475,14 +475,14 @@ const basicCardRecipe: ToolBoxEntry = {
               source: ToolBoxEntryAttributeValueSource.Direct,
               value: 'd-inline-flex btn btn-primary',
             },
-            groupElements: false,
+            groupElements: true,
           },
         ],
         attributes: [],
         behaviours: [],
         classesStyles: {
           source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'omniabasecomponent-card-footer d-flex justify-content-end',
+          value: 'card-footer text-right',
         },
         groupElements: false,
       },
@@ -491,13 +491,13 @@ const basicCardRecipe: ToolBoxEntry = {
     behaviours: [],
     classesStyles: {
       source: ToolBoxEntryAttributeValueSource.Direct,
-      value: 'omniabasecomponent-card col-4 mr-3',
+      value: 'card col-3 ml-3 mb-3 p-0',
     },
   },
 };
 
 const imageCardRecipe: ToolBoxEntry = {
-  name: 'image Card',
+  name: 'image card',
   icon: 'address-card-o',
   element: {
     name: 'card',
@@ -511,7 +511,12 @@ const imageCardRecipe: ToolBoxEntry = {
         behaviours: [],
         classesStyles: {
           source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'omniabasecomponent-card-image',
+          value: 'card-img-top',
+        },
+        cssStyle: {
+          source: ToolBoxEntryAttributeValueSource.Direct,
+          value:
+            '    border-top-left-radius: 25px;\r\n    border-top-right-radius: 25px;\r\n    border-bottom-left-radius: 0px !important;\r\n    border-bottom-right-radius: 0px !important;',
         },
         groupElements: false,
       },
@@ -579,121 +584,20 @@ const imageCardRecipe: ToolBoxEntry = {
         behaviours: [],
         classesStyles: {
           source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'omniabasecomponent-card-container',
+          value: 'card-body',
         },
         groupElements: false,
       },
       {
-        name: 'carfooterbutton',
-        type: ComponentTypes.BUTTON,
-        elements: [
-          {
-            name: 'buttonIcon',
-            type: ComponentTypes.ICON,
-            elements: [],
-            attributes: [
-              {
-                key: 'value',
-                value: {
-                  value: 'font-awesome',
-                  source: ToolBoxEntryAttributeValueSource.Direct,
-                },
-              },
-            ],
-            behaviours: [],
-            classesStyles: {
-              source: ToolBoxEntryAttributeValueSource.Direct,
-              value: 'pt-1',
-            },
-            groupElements: false,
-          },
-          {
-            name: 'buttonText',
-            type: ComponentTypes.TEXT,
-            elements: [],
-            attributes: [
-              {
-                key: 'value',
-                value: {
-                  source: ToolBoxEntryAttributeValueSource.Direct,
-                  value: 'myText',
-                },
-              },
-            ],
-            behaviours: [],
-            groupElements: false,
-          },
-        ],
-        attributes: [],
-        behaviours: [
-          {
-            name: 'OnClick',
-            expression: '//',
-          },
-        ],
-        classesStyles: {
-          source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'omniabasecomponent-card-footer-button btn btn-primary',
-        },
-        groupElements: false,
-      },
-    ],
-    attributes: [],
-    behaviours: [],
-    classesStyles: {
-      source: ToolBoxEntryAttributeValueSource.Direct,
-      value: 'omniabasecomponent-card col-3 ml-3 mb-3 p-0',
-    },
-    groupElements: true,
-  },
-};
-
-const tileRecipe: ToolBoxEntry = {
-  name: 'tile',
-  icon: 'window-close-o',
-  element: {
-    name: 'card',
-    type: ComponentTypes.PANEL,
-    elements: [
-      {
-        name: 'cardHeader',
+        name: 'carfooter',
         type: ComponentTypes.PANEL,
         elements: [
           {
-            name: 'cardHeaderLeft',
-            type: ComponentTypes.PANEL,
+            name: 'carfooterbutton',
+            type: ComponentTypes.BUTTON,
             elements: [
               {
-                name: 'cardHeaderText',
-                type: ComponentTypes.TEXT,
-                elements: [],
-                attributes: [
-                  {
-                    key: 'value',
-                    value: {
-                      value: 'Title',
-                      source: ToolBoxEntryAttributeValueSource.Direct,
-                    },
-                  },
-                ],
-                behaviours: [],
-                groupElements: false,
-              },
-            ],
-            attributes: [],
-            behaviours: [],
-            classesStyles: {
-              source: ToolBoxEntryAttributeValueSource.Direct,
-              value: 'col-6',
-            },
-            groupElements: false,
-          },
-          {
-            name: 'cardHeaderRight',
-            type: ComponentTypes.PANEL,
-            elements: [
-              {
-                name: 'cardHeaderIcon',
+                name: 'buttonIcon',
                 type: ComponentTypes.ICON,
                 elements: [],
                 attributes: [
@@ -706,6 +610,26 @@ const tileRecipe: ToolBoxEntry = {
                   },
                 ],
                 behaviours: [],
+                classesStyles: {
+                  source: ToolBoxEntryAttributeValueSource.Direct,
+                  value: 'pt-1',
+                },
+                groupElements: false,
+              },
+              {
+                name: 'buttonText',
+                type: ComponentTypes.TEXT,
+                elements: [],
+                attributes: [
+                  {
+                    key: 'value',
+                    value: {
+                      source: ToolBoxEntryAttributeValueSource.Direct,
+                      value: 'myText',
+                    },
+                  },
+                ],
+                behaviours: [],
                 groupElements: false,
               },
             ],
@@ -713,165 +637,26 @@ const tileRecipe: ToolBoxEntry = {
             behaviours: [],
             classesStyles: {
               source: ToolBoxEntryAttributeValueSource.Direct,
-              value: 'col-6 d-flex justify-content-end',
+              value: 'w-100 btn btn-primary',
             },
-            groupElements: false,
+            cssStyle: {
+              source: ToolBoxEntryAttributeValueSource.Direct,
+              value:
+                '    border-bottom-left-radius: 25px;\r\n    border-bottom-right-radius: 25px;\r\n    border-top-left-radius: 0px !important;\r\n    border-top-right-radius: 0px !important;',
+            },
+            groupElements: true,
           },
         ],
         attributes: [],
         behaviours: [],
         classesStyles: {
           source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'row omniabasecomponent-card-header omniabasecomponent-card-header-text',
+          value: 'card-footer row justify-content-md-center m-0 p-0',
         },
-        groupElements: false,
-      },
-      {
-        name: 'cardContainer',
-        type: ComponentTypes.PANEL,
-        elements: [
-          {
-            name: 'containerNumber',
-            type: ComponentTypes.PANEL,
-            elements: [
-              {
-                name: 'containerNumberText',
-                type: ComponentTypes.TEXT,
-                elements: [],
-                attributes: [
-                  {
-                    key: 'value',
-                    value: {
-                      value: '25',
-                      source: ToolBoxEntryAttributeValueSource.Direct,
-                    },
-                  },
-                ],
-                cssStyle: {
-                  source: ToolBoxEntryAttributeValueSource.Direct,
-                  value: 'color:#2196f3;\r\n',
-                },
-                behaviours: [],
-                classesStyles: {
-                  source: ToolBoxEntryAttributeValueSource.Direct,
-                  value: 'font-weight-bold',
-                },
-                groupElements: false,
-              },
-            ],
-            attributes: [],
-            behaviours: [],
-            classesStyles: {
-              source: ToolBoxEntryAttributeValueSource.Direct,
-              value: 'row justify-content-md-center m-0',
-            },
-            groupElements: false,
-          },
-          {
-            name: 'containerMessage',
-            type: ComponentTypes.PANEL,
-            elements: [
-              {
-                name: 'containerMessageText',
-                type: ComponentTypes.TEXT,
-                elements: [],
-                attributes: [
-                  {
-                    key: 'value',
-                    value: {
-                      value: 'Due Tasks',
-                      source: ToolBoxEntryAttributeValueSource.Direct,
-                    },
-                  },
-                ],
-                cssStyle: {
-                  source: ToolBoxEntryAttributeValueSource.Direct,
-                  value: 'color:#2196f3;',
-                },
-                behaviours: [],
-                groupElements: false,
-              },
-            ],
-            attributes: [],
-            behaviours: [],
-            classesStyles: {
-              source: ToolBoxEntryAttributeValueSource.Direct,
-              value: 'row justify-content-md-center m-0',
-            },
-            groupElements: false,
-          },
-        ],
-        attributes: [],
-        behaviours: [],
-        classesStyles: {
+        cssStyle: {
           source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'omniabasecomponent-card-container',
-        },
-        groupElements: false,
-      },
-      {
-        name: 'cardFooter',
-        type: ComponentTypes.PANEL,
-        elements: [
-          {
-            name: 'panel1',
-            type: ComponentTypes.PANEL,
-            elements: [
-              {
-                name: 'text2',
-                type: ComponentTypes.TEXT,
-                elements: [],
-                attributes: [
-                  {
-                    key: 'value',
-                    value: {
-                      value: 'Completed:',
-                      source: ToolBoxEntryAttributeValueSource.Direct,
-                    },
-                  },
-                ],
-                behaviours: [],
-                classesStyles: {
-                  source: ToolBoxEntryAttributeValueSource.Direct,
-                  value: 'mr-2',
-                },
-                groupElements: false,
-              },
-              {
-                name: 'text3',
-                type: ComponentTypes.TEXT,
-                elements: [],
-                attributes: [
-                  {
-                    key: 'value',
-                    value: {
-                      value: '7',
-                      source: ToolBoxEntryAttributeValueSource.Direct,
-                    },
-                  },
-                ],
-                behaviours: [],
-                classesStyles: {
-                  source: ToolBoxEntryAttributeValueSource.Direct,
-                  value: 'font-weight-bold',
-                },
-                groupElements: false,
-              },
-            ],
-            attributes: [],
-            behaviours: [],
-            classesStyles: {
-              source: ToolBoxEntryAttributeValueSource.Direct,
-              value: 'row justify-content-md-center m-0',
-            },
-            groupElements: false,
-          },
-        ],
-        attributes: [],
-        behaviours: [],
-        classesStyles: {
-          source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'omniabasecomponent-card-footer',
+          value:
+            '    border-bottom-left-radius: 25px;\r\n    border-bottom-right-radius: 25px;\r\n    border-top-left-radius: 0px !important;\r\n    border-top-right-radius: 0px !important;',
         },
         groupElements: false,
       },
@@ -880,7 +665,11 @@ const tileRecipe: ToolBoxEntry = {
     behaviours: [],
     classesStyles: {
       source: ToolBoxEntryAttributeValueSource.Direct,
-      value: 'omniabasecomponent-card col-3 mr-3',
+      value: 'card col-3 ml-3 mb-3 p-0',
+    },
+    cssStyle: {
+      source: ToolBoxEntryAttributeValueSource.Direct,
+      value: '    border-radius: 25px;\r\n    border: 0px;',
     },
     groupElements: true,
   },
@@ -1080,6 +869,5 @@ export const ToolBoxEntries: ToolBoxEntry[] = [
   entityFormAttributeRecipe,
   basicCardRecipe,
   imageCardRecipe,
-  tileRecipe,
   paginationRecipe,
 ];

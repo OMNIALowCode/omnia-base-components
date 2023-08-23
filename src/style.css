@@ -1,94 +1,17 @@
 .omniabasecomponent-card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 100%;
   border-radius: 25px;
-  margin-top: 16px;
-  padding: 0px;
-  background-color: #fff;
 }
 
-.omniabasecomponent-card-image {
+.omniabasecomponent-card-border-top {
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  width: 100%;
-  margin-bottom: 15px;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
 }
 
-.omniabasecomponent-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.omniabasecomponent-card-header {
-  padding-top: 25px;
-  padding-left: 25px;
-  padding-right: 25px;
-  margin-bottom: 15px;
-  line-height: 2.4rem;
-  font-weight: 500;
-  font-size: 1.6rem;
-  border-radius: 25px;
-  margin-right: 0px;
-  margin-left: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-
-.omniabasecomponent-card-container {
-  padding-left: 25px;
-  padding-right: 25px;
-  margin-bottom: 15px;
-  line-height: 1;
-}
-
-.omniabasecomponent-card-footer {
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 25px;
-}
-
-.omniabasecomponent-card-header-text {
-  letter-spacing: -0.025em;
-  line-height: 2.4rem;
-  color: rgb(107, 114, 128);
-}
-
-.omniabasecomponent-Label {
-  text-align: right;
-  min-width: 10rem;
-  margin-right: 2rem;
-  vertical-align: middle;
-}
-
-.omniabasecomponent-card-footer-button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  width: 100%;
+.omniabasecomponent-card-border-bottom {
   border-bottom-left-radius: 25px !important;
   border-bottom-right-radius: 25px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
-}
-
-.omniabasecomponent-panel-page {
-  margin-left: -15px;
-  margin-right: -15px;
-}
-
-.omniabasecomponent-panel-top {
-  background-size: cover;
-  background-position: 50% 100%;
-  background-color: #f1f5f9;
-  height: 500px;
-}
-
-.omniabasecomponent-page-body {
-  background-color: #f4f6f9;
-  min-height: 100%;
-}
-
-.omniabasecomponent-page-header {
-  padding: 15px 0.5rem;
 }

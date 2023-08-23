@@ -21,6 +21,7 @@ const ComponentTypes = {
   INPUT_PASSWORD: 'InputPassword',
   INPUT_TEXTAREA: 'InputTextArea',
   FILE_UPLOAD: 'FileUpload',
+  INPUT_RADIO: 'InputRadio',
 };
 
 export default ComponentTypes;
