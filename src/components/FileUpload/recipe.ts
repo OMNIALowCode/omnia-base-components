@@ -2,7 +2,7 @@ import { ToolBoxEntry, ToolBoxEntryAttributeValueSource } from 'omnia-component-
 import ComponentTypes from '../all-types';
 const recipes: ToolBoxEntry[] = [
   {
-    name: 'fileupload',
+    name: 'file upload',
     icon: 'floppy-o',
     element: {
       name: 'fileUpload',

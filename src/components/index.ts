@@ -20,4 +20,3 @@ export { default as TableHead } from './Table/TableHead';
 export { default as TableHeadCell } from './Table/TableHeadCell';
 export { default as TableRow } from './Table/TableRow';
 export { default as Text } from './Text';
-
