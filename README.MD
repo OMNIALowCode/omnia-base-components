@@ -62,10 +62,6 @@ It should be used to render information to the end user, and grant the user the 
 
 Similar to the basic Card, but it adds a Image component.
 
-- tile
-
-Similar to the basic Card, but the Button component is not present.
-
 - pagination
 
 This entry renders a panel with a set of buttons and texts, with the purpose of rendering pagination controls.
