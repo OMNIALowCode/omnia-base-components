@@ -2834,10 +2834,10 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.npmjs.org/obuf/-/obuf-1.1.2.tgz"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-omnia-component-framework@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/omnia-component-framework/-/omnia-component-framework-0.0.5.tgz#d81fbec165a390ca2ddb6271a2c62db1a5ea1a28"
-  integrity sha512-Z77jls8oUg0Uou5tAO3BDyIWrG/zQpuGABEBmM4D66MBYRXcCU9JEymSY+DpiD2aUI0oqejgQd9BHSGrFWymdQ==
+omnia-component-framework@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/omnia-component-framework/-/omnia-component-framework-0.0.6.tgz#bf7e21f23a796f4d4dfb3b81676670489b0f22e7"
+  integrity sha512-ZjWPSFHQ6Q2tGmwFoRzfYNXKtSI+WdBiB2vk2s3AuH2F8nn8bS7S3iBXdPTaxs7IbYre8Zs+/ELD4YUbYnq4KA==
   dependencies:
     "@babel/core" "7.16.7"
     "@typescript-eslint/eslint-plugin" "5.8.1"
