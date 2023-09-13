@@ -589,11 +589,11 @@ const imageCardRecipe: ToolBoxEntry = {
         groupElements: false,
       },
       {
-        name: 'carfooter',
+        name: 'cardfooter',
         type: ComponentTypes.PANEL,
         elements: [
           {
-            name: 'carfooterbutton',
+            name: 'cardfooterbutton',
             type: ComponentTypes.BUTTON,
             elements: [
               {
