@@ -786,70 +786,83 @@ const lookUpRecipe: ToolBoxEntry = {
     type: 'Panel',
     elements: [
       {
-        name: 'lookUpButtonPanel',
+        name: 'lookUpInputPanel',
         type: 'Panel',
         elements: [
           {
-            name: 'lookUpButton',
-            type: 'Button',
+            name: 'lookUpButtonPanel',
+            type: 'Panel',
             elements: [
               {
-                name: 'lookUpButtonIcon',
-                type: 'Icon',
-                elements: [],
-                attributes: [
+                name: 'lookUpButton',
+                type: 'Button',
+                elements: [
                   {
-                    key: 'value',
-                    value: {
-                      value: 'search',
+                    name: 'lookUpButtonIcon',
+                    type: 'Icon',
+                    elements: [],
+                    attributes: [
+                      {
+                        key: 'value',
+                        value: {
+                          value: 'search',
+                          source: ToolBoxEntryAttributeValueSource.Direct,
+                        },
+                      },
+                    ],
+                    behaviours: [],
+                    classesStyles: {
                       source: ToolBoxEntryAttributeValueSource.Direct,
+                      value: 'w-100 pt-1',
                     },
+                    groupElements: false,
                   },
                 ],
-                behaviours: [],
-                classesStyles: {
+                attributes: [],
+                cssStyle: {
+                  value: '    border-color: #ced4da;',
                   source: ToolBoxEntryAttributeValueSource.Direct,
-                  value: 'w-100 pt-1',
                 },
-                groupElements: false,
+                behaviours: [
+                  {
+                    name: 'OnClick',
+                    expression:
+                      '     /* context.uiTools.openModal({\r\n        type: "list",\r\n        name: "XXXXXX",\r\n        onClose: (result, args) => {\r\n            if (result == \'Selected\')\r\n                currentElement.value = args._code;\r\n        },\r\n    }); */',
+                  },
+                ],
+                classesStyles: {
+                  value: 'btn btn-outline-secondary',
+                  source: ToolBoxEntryAttributeValueSource.Direct,
+                },
+                groupElements: true,
               },
             ],
             attributes: [],
-            cssStyle: {
-              value: '    border-color: #ced4da;',
-              source: ToolBoxEntryAttributeValueSource.Direct,
-            },
-            behaviours: [
-              {
-                name: 'OnClick',
-                expression:
-                  '     /* context.uiTools.openModal({\r\n        type: "list",\r\n        name: "XXXXXX",\r\n        onClose: (result, args) => {\r\n            if (result == \'Selected\')\r\n                currentElement.value = args._code;\r\n        },\r\n    }); */',
-              },
-            ],
+            behaviours: [],
             classesStyles: {
-              value: 'btn btn-outline-secondary',
+              value: 'input-group-prepend',
               source: ToolBoxEntryAttributeValueSource.Direct,
             },
-            groupElements: true,
+            groupElements: false,
+          },
+          {
+            name: 'lookUpInput',
+            type: 'Input',
+            elements: [],
+            attributes: [],
+            behaviours: [],
+            classesStyles: {
+              source: ToolBoxEntryAttributeValueSource.Direct,
+              value: 'form-field-text form-control',
+            },
+            groupElements: false,
           },
         ],
         attributes: [],
         behaviours: [],
         classesStyles: {
-          value: 'input-group-prepend',
+          value: 'input-group',
           source: ToolBoxEntryAttributeValueSource.Direct,
-        },
-        groupElements: false,
-      },
-      {
-        name: 'lookUpInput',
-        type: 'Input',
-        elements: [],
-        attributes: [],
-        behaviours: [],
-        classesStyles: {
-          source: ToolBoxEntryAttributeValueSource.Direct,
-          value: 'form-field-text form-control',
         },
         groupElements: false,
       },
